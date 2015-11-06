@@ -34,7 +34,7 @@ class SynthesizeOption extends FixedDictionary {
 	*	@var array $arrDefaults The default values.
 	*/
 	protected $arrDefaults = array(
-		'type' => 'Id',
+		'type' => 'id',
 		'default' => ''
 	);
 }
