@@ -1,0 +1,145 @@
+<?php
+/**
+*	This file contains the Synthesizer Trait.
+*
+*	@package		Synthesize
+*	@author			Jacob Wyke <jacob@frozensheep.com>
+*	@file_Version	$Rev: 1937 $
+*	@Last_Change	$LastChangedDate: 2014-11-27 10:18:05 +0000 (Thu, 27 Nov 2014) $
+*
+*/
+
+namespace Frozensheep\Synthesize;
+
+use Frozensheep\Synthesize\Synthesize;
+use Frozensheep\Synthesize\Exception\MissingMethodException;
+use Frozensheep\Synthesize\Exception\SynthesizeException;
+
+/**
+*	Synthesizer Trait
+*
+*	The trait to control the synthesizer functionality.
+*
+*	This provides getter/setter methods automatically to any setup properties.
+*	To setup the synthesize properties use the following class var:
+*
+*	protected $arrSynthesize = array(
+*		'get' => array('type' => 'Dictionary'),
+*		'post' => array('type' => 'Dictionary'),
+*		'cookie' => array('type' => 'Dictionary'),
+*		'server' => array('type' => 'ServerCollection'),
+*		'files' => array('type' => 'Dictionary')
+*	);
+*
+*	@package		Frozensheep\Synthesize
+*
+*/
+trait Synthesizer {
+
+	/*
+	* @var Synthesize $_objSynthesize Object containing the synthesize object for this class.
+	*/
+	private $_objSynthesize = null;
+
+	/*
+	* @var mixed $_mixSynthesizeOptions Contains the synthesize options.
+	*/
+	private $_mixSynthesizeOptions;
+
+	/**
+	*	__Call Magic Method
+	*
+	*	Controls all unknown method calls for the class and attempts to answer them by using our synthesize options.
+	*	@param string $strName The name of the method called.
+	*	@param array $arrArguments The array of arguments passed to the method call.
+	*	@todo Look at allowing multiple arguments to be passed when setting - could be useful for array data types or something.
+	*	@return mixed
+	*/
+    public function __call($strName, Array $arrArguments){
+		if(method_exists($this, $strName)){
+        	return $this->$strName(implode(", ", $arrArguments));
+        }else{
+			//check to see if there's a synthesize property for this
+			if($this->getSynthesize()->hasProperty($strName)){
+				if(isset($arrArguments[0])){
+					//set request
+					return $this->getSynthesize()->set($strName, $arrArguments[0]);
+				}else{
+					//get request
+					return $this->getSynthesize()->get($strName);
+				}
+			}else{
+				throw new MissingMethodException($strName, $this);
+			}
+        }
+    }
+
+	/**
+	*	__get Magic Method
+	*
+	*	Handles out synthesize code to return the variable requested.
+	*	@param string $strProperty The requested property name.
+	*	@return mixed
+	*/
+    public function __get($strProperty){
+		if($this->getSynthesize()->hasProperty($strProperty)){
+			return $this->getSynthesize()->get($strProperty);
+		}else{
+			throw new SynthesizeException($strProperty, $this);
+		}
+    }
+
+	/*
+	*
+	*	@Method:		__set
+	*	@Parameters:	2
+	*	@Param-1:		strProperty - String - The property the developer is trying to access
+	*	@Param-2:		mixValue - Mixed - The value to set
+	*	@Description:	Sets a property value
+	*
+	*/
+    public function __set($strProperty, $mixValue){
+		if($this->getSynthesize()->hasProperty($strProperty)){
+			return $this->getSynthesize()->set($strProperty, $mixValue);
+		}else{
+			throw new SynthesizeException($strProperty, $this);
+		}
+    }
+
+	/**
+	*	Get Synthesize Object
+	*
+	*	Sets up and returns the synthesize object.
+	*	@return \Frozensheep\RightmoveADF\Synthesize
+	*/
+    public function getSynthesize(){
+		if(!$this->_objSynthesize instanceof Synthesize){
+			$this->_objSynthesize = $this->_createSynthesize();
+		}
+
+		return $this->_objSynthesize;
+    }
+
+	/**
+	*	Create Synthesize
+	*
+	*	Factory to create the a synthesize object. Currently only accepts synthesize options in array format.
+	*	@param mixed $mixSynthesize The synthesize options. If none are passed it checks for build options from the calling class.
+	*	@return \Frozensheep\RightmoveADF\Synthesize
+	*/
+    private function _createSynthesize($mixSynthesize = null){
+		//override the values set in the class with the ones passed
+		if($mixSynthesize){
+			$this->_mixSynthesizeOptions = $mixSynthesize;
+		}else{
+			if(isset($this->arrSynthesize)){
+				$this->_mixSynthesizeOptions = $this->arrSynthesize;
+			}else if(isset($this->mixSynthesize)){
+				$this->_mixSynthesizeOptions = $this->mixSynthesize;
+			}
+		}
+
+		//create the object
+		return new Synthesize($this->_mixSynthesizeOptions);
+    }
+}
