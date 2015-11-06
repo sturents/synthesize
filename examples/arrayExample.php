@@ -29,7 +29,15 @@ class ArrayExample {
 
 	//set the synthesized variables
 	protected $arrSynthesize = array(
-		'myString' => array('type' => 'String')
+		'myString' => array('type' => 'string'),
+		'myBool' => array('type' => 'boolean'),
+		'myDouble' => array('type' => 'double'),
+		'myFloat' => array('type' => 'float'),
+		'myInt' => array('type' => 'int'),
+		'myNumber' => array('type' => 'number'),
+		'myObject' => array('type' => 'object'),
+		'myResource' => array('type' => 'resource'),
+		'testing'
 	);
 }
 
@@ -39,3 +47,9 @@ $objExample = new ArrayExample();
 //use the synthesized variables
 $objExample->myString = 'hello world';
 echo $objExample->myString.PHP_EOL;
+
+$objExample->myNumber = 123;
+echo $objExample->myNumber.PHP_EOL;
+
+$objExample->testing = 5.34;
+echo $objExample->testing.PHP_EOL;
