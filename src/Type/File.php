@@ -1,10 +1,10 @@
 <?php
-/*
+/**
+*	File containing the File Class.
 *
-*	@package		Synthesize
-*	@author			Jacob Wyke <jacob@frozensheep.com>
-*	@file_Version	$Rev: 1937 $
-*	@Last_Change	$LastChangedDate: 2014-11-27 10:18:05 +0000 (Thu, 27 Nov 2014) $
+*	@package	Frozensheep\Synthesize
+*	@author		Jacob Wyke <jacob@frozensheep.com>
+*	@license	MIT
 *
 */
 
@@ -12,8 +12,19 @@ namespace Frozensheep\Synthesize\Type;
 
 use Frozensheep\Synthesize\Type\FixedDictionary;
 
+/**
+*	File Class
+*
+*	A File data type for uploaded files.
+*
+*	@package	Frozensheep\Synthesize
+*
+*/
 class File extends FixedDictionary {
 
+	/**
+	*	@var array $arrKeys The allowed keys.
+	*/
 	protected $arrKeys = array(
 		'error',
 		'name',
@@ -22,12 +33,14 @@ class File extends FixedDictionary {
 		'type'
 	);
 
+	/**
+	*	@var array $arrDefaults The default values.
+	*/
 	protected $arrDefaults = array(
-		'error' => NULL,
-		'name' => NULL,
-		'size' => NULL,
-		'tmp_name' => NULL,
-		'type' => NULL,
+		'error' => null,
+		'name' => null,
+		'size' => null,
+		'tmp_name' => null,
+		'type' => null,
 	);
-
 }

@@ -1,10 +1,10 @@
 <?php
-/*
+/**
+*	File containing the Synthesize Option Class.
 *
-*	@package		Synthesize
-*	@author			Jacob Wyke <jacob@frozensheep.com>
-*	@file_Version	$Rev: 1937 $
-*	@Last_Change	$LastChangedDate: 2014-11-27 10:18:05 +0000 (Thu, 27 Nov 2014) $
+*	@package	Frozensheep\Synthesize
+*	@author		Jacob Wyke <jacob@frozensheep.com>
+*	@license	MIT
 *
 */
 
@@ -12,13 +12,27 @@ namespace Frozensheep\Synthesize\Type;
 
 use Frozensheep\Synthesize\Type\FixedDictionary;
 
+/**
+*	Synthesize Option Class
+*
+*	A fixed dictionary data type to hold the synthesize options in.
+*
+*	@package	Frozensheep\Synthesize
+*
+*/
 class SynthesizeOption extends FixedDictionary {
 
+	/**
+	*	@var array $arrKeys The allowed keys.
+	*/
 	protected $arrKeys = array(
 		'type',
 		'default'
 	);
 
+	/**
+	*	@var array $arrDefaults The default values.
+	*/
 	protected $arrDefaults = array(
 		'type' => 'Id',
 		'default' => ''

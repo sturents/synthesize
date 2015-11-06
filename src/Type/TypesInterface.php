@@ -1,43 +1,47 @@
 <?php
-/*
+/**
+*	This file contains the Types interface.
 *
-*	@package		Synthesize
-*	@author			Jacob Wyke <jacob@frozensheep.com>
-*	@file_Version	$Rev: 1937 $
-*	@Last_Change	$LastChangedDate: 2014-11-27 10:18:05 +0000 (Thu, 27 Nov 2014) $
+*	@package	Frozensheep\Synthesize
+*	@author		Jacob Wyke <jacob@frozensheep.com>
+*	@license	MIT
 *
 */
 
 namespace Frozensheep\Synthesize\Type;
 
+/**
+*	Types Interface
+*
+*	The Interface for all data types used in the synthesize process.
+*	@package	Frozensheep\Synthesize
+*
+*/
 interface TypesInterface {
 
-	/*
+	/**
+	*	Get Value Method
 	*
-	*	@Method:		getValue
-	*	@Parameters:	0
-	*	@Description:	returns the value
-	*
+	*	Returns the value for the property.
+	*	@return mixed
 	*/
 	public function getValue();
 
-	/*
+	/**
+	*	Set Value Method
 	*
-	*	@Method:		setValue
-	*	@Parameters:	1
-	*	@Param-1:		mixValue - Mixed - The value tomethod name
-	*	@Description:	Sets the value
-	*
+	*	Sets the value for the property.
+	*	@param mixed $mixValue The value to check.
+	*	@return bool
 	*/
 	public function setValue($mixValue);
 
-	/*
+	/**
+	*	Is Valid Method
 	*
-	*	@Method:		isValid
-	*	@Parameters:	1
-	*	@Param-1:		mixValue - Mixed - The value tomethod name
-	*	@Description:	Checks to see if the value is valid for the given class
-	*
+	*	Checks to see if the value is valud for the given data type.
+	*	@param mixed $mixValue The value to check.
+	*	@return bool
 	*/
 	public function isValid($mixValue);
 }

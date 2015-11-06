@@ -1,10 +1,10 @@
 <?php
-/*
+/**
+*	File containing the Type class.
 *
-*	@package		Synthesize
-*	@author			Jacob Wyke <jacob@frozensheep.com>
-*	@file_Version	$Rev: 1937 $
-*	@Last_Change	$LastChangedDate: 2014-11-27 10:18:05 +0000 (Thu, 27 Nov 2014) $
+*	@package	Frozensheep\Synthesize
+*	@author		Jacob Wyke <jacob@frozensheep.com>
+*	@license	MIT
 *
 */
 
@@ -13,58 +13,66 @@ namespace Frozensheep\Synthesize\Type;
 use Frozensheep\Synthesize\Type\TypesInterface;
 use Frozensheep\Synthesize\Exception\TypeException;
 
+/**
+*	Type Class
+*
+*	The type class whic provides the most fundamental methods needed for all data types and acts as the parent class for many sub-data types.
+*
+*	@package	Frozensheep\Synthesize
+*
+*/
 class Type implements TypesInterface {
 
+	/**
+	*	@var mixed $mixValue The value we are storing.
+	*/
 	protected $mixValue;
 
-	/*
+	/**
+	*	Class Contructor
 	*
-	*	@Method:		__construct
-	*	@Parameters:	1
-	*	@Param-1:		arrOptions - Array - The options
-	*	@Description:	Ensures that the value is an array
-	*
+	*	@param mixed $mixValue An optional value to set on construction.
+	*	@return self
 	*/
-	public function __construct($mixValue = NULL){
+	public function __construct($mixValue = null){
 		$this->setValue($mixValue);
 	}
 
-	/*
+	/**
+	*	Get Value Method
 	*
-	*	@Method:		getValue
-	*	@Parameters:	0
-	*	@Description:	returns the value
-	*
+	*	Returns the value for the property.
+	*	@return mixed
 	*/
 	public function &getValue(){
 		return $this->mixValue;
 	}
 
-	/*
+	/**
+	*	Set Value Method
 	*
-	*	@Method:		setValue
-	*	@Parameters:	1
-	*	@Param-1:		mixValue - Mixed - The value tomethod name
-	*	@Description:	Sets the value
-	*
+	*	Sets the value for the property.
+	*	@param mixed $mixValue The value to check.
+	*	@throws TypeException if valud is not valid.
+	*	@return bool
 	*/
 	public function setValue($mixValue){
 		if($this->isValid($mixValue) || is_null($mixValue)){
 			$this->mixValue = $mixValue;
+			return true;
 		}else{
 			throw new TypeException($mixValue, get_class($this));
 		}
 	}
 
-	/*
+	/**
+	*	Is Valid Method
 	*
-	*	@Method:		isValid
-	*	@Parameters:	1
-	*	@Param-1:		mixValue - Mixed - The value tomethod name
-	*	@Description:	Checks to see if the value is valid for the given class
-	*
+	*	Checks to see if the value is valud for the given data type.
+	*	@param mixed $mixValue The value to check.
+	*	@return bool
 	*/
 	public function isValid($mixValue){
-		return 1;
+		return true;
 	}
 }
