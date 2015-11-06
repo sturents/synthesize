@@ -2,10 +2,9 @@
 /**
 *	This file contains the Synthesizer Trait.
 *
-*	@package		Synthesize
-*	@author			Jacob Wyke <jacob@frozensheep.com>
-*	@file_Version	$Rev: 1937 $
-*	@Last_Change	$LastChangedDate: 2014-11-27 10:18:05 +0000 (Thu, 27 Nov 2014) $
+*	@package	Frozensheep\Synthesize
+*	@author		Jacob Wyke <jacob@frozensheep.com>
+*	@license	MIT
 *
 */
 
@@ -14,6 +13,7 @@ namespace Frozensheep\Synthesize;
 use Frozensheep\Synthesize\Synthesize;
 use Frozensheep\Synthesize\Exception\MissingMethodException;
 use Frozensheep\Synthesize\Exception\SynthesizeException;
+use Frozensheep\Synthesize\Exception\MissingOptionsFileException;
 
 /**
 *	Synthesizer Trait
@@ -31,17 +31,17 @@ use Frozensheep\Synthesize\Exception\SynthesizeException;
 *		'files' => array('type' => 'Dictionary')
 *	);
 *
-*	@package		Frozensheep\Synthesize
+*	@package	Frozensheep\Synthesize
 *
 */
 trait Synthesizer {
 
-	/*
+	/**
 	* @var Synthesize $_objSynthesize Object containing the synthesize object for this class.
 	*/
 	private $_objSynthesize = null;
 
-	/*
+	/**
 	* @var mixed $_mixSynthesizeOptions Contains the synthesize options.
 	*/
 	private $_mixSynthesizeOptions;
@@ -57,7 +57,7 @@ trait Synthesizer {
 	*/
     public function __call($strName, Array $arrArguments){
 		if(method_exists($this, $strName)){
-        	return $this->$strName(implode(", ", $arrArguments));
+        	return $this->$strName(implode(', ', $arrArguments));
         }else{
 			//check to see if there's a synthesize property for this
 			if($this->getSynthesize()->hasProperty($strName)){
@@ -79,6 +79,7 @@ trait Synthesizer {
 	*
 	*	Handles out synthesize code to return the variable requested.
 	*	@param string $strProperty The requested property name.
+	*	@throws SynthesizeException if there is no property with that name.
 	*	@return mixed
 	*/
     public function __get($strProperty){
@@ -89,14 +90,14 @@ trait Synthesizer {
 		}
     }
 
-	/*
+	/**
+	*	__set Magic Method
 	*
-	*	@Method:		__set
-	*	@Parameters:	2
-	*	@Param-1:		strProperty - String - The property the developer is trying to access
-	*	@Param-2:		mixValue - Mixed - The value to set
-	*	@Description:	Sets a property value
-	*
+	*	Handles setting values.
+	*	@param string $strProperty The property name.
+	*	@param mixed $mixValue The value to set.
+	*	@throws SynthesizeException if there is no property with that name.
+	*	@return null
 	*/
     public function __set($strProperty, $mixValue){
 		if($this->getSynthesize()->hasProperty($strProperty)){
@@ -110,7 +111,7 @@ trait Synthesizer {
 	*	Get Synthesize Object
 	*
 	*	Sets up and returns the synthesize object.
-	*	@return \Frozensheep\RightmoveADF\Synthesize
+	*	@return \Frozensheep\Synthesize
 	*/
     public function getSynthesize(){
 		if(!$this->_objSynthesize instanceof Synthesize){
@@ -125,21 +126,45 @@ trait Synthesizer {
 	*
 	*	Factory to create the a synthesize object. Currently only accepts synthesize options in array format.
 	*	@param mixed $mixSynthesize The synthesize options. If none are passed it checks for build options from the calling class.
-	*	@return \Frozensheep\RightmoveADF\Synthesize
+	*	@return \Frozensheep\Synthesize
 	*/
     private function _createSynthesize($mixSynthesize = null){
 		//override the values set in the class with the ones passed
 		if($mixSynthesize){
 			$this->_mixSynthesizeOptions = $mixSynthesize;
 		}else{
-			if(isset($this->arrSynthesize)){
+			if(!empty($this->arrSynthesize)){
+				//array settings override all others
 				$this->_mixSynthesizeOptions = $this->arrSynthesize;
+				echo json_encode($this->arrSynthesize);
 			}else if(isset($this->mixSynthesize)){
 				$this->_mixSynthesizeOptions = $this->mixSynthesize;
+			}else{
+				//fall back to gettin settings from JSON file with same name as class
+				$this->_mixSynthesizeOptions = $this->_loadOptionsFromFile(get_class());
 			}
 		}
 
 		//create the object
 		return new Synthesize($this->_mixSynthesizeOptions);
+    }
+
+	/**
+	*	Load Options From File Class
+	*
+	*	Attempts to load the synthesize options from the JSON file passed.
+	*	@param string $strFileName The name of the JSON file where the options are.
+	*	@return \Frozensheep\Synthesize
+	*/
+    private function _loadOptionsFromFile($strFileName){
+    	//get the path for the class file and name and add the .json extension to the file name
+    	$objReflector = new \ReflectionClass($this);
+    	$strFileName = dirname($objReflector->getFileName()).'/'.$strFileName.'.json';
+
+    	if(file_exists($strFileName)){
+			return file_get_contents($strFileName);
+    	}else{
+			throw new MissingOptionsFileException($strFileName);
+    	}
     }
 }
