@@ -60,6 +60,7 @@ abstract class FixedDictionary extends Dictionary {
 			}
 			parent::set($strKey, $mixValue);
 		}
+		$this->updateKeys();
 	}
 
 	/**
@@ -73,6 +74,7 @@ abstract class FixedDictionary extends Dictionary {
 	public function set($strKey, $mixValue){
 		if($this->has($strKey)){
 			$this->getValue()[$strKey] = $mixValue;
+			$this->updateKeys();
 		}else{
 			throw new \Exception();
 		}

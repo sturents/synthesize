@@ -108,7 +108,17 @@ trait Synthesizer {
     }
 
 	/**
-	*	Get Synthesize Object
+	*	To String Magic Method
+	*
+	*	Returns the string form of the data type.
+	*	@return string
+	*/
+	public function __toString(){
+		return json_encode($this->jsonSerialize());
+	}
+
+	/**
+	*	Get Synthesize Method
 	*
 	*	Sets up and returns the synthesize object.
 	*	@return \Frozensheep\Synthesize
@@ -122,7 +132,7 @@ trait Synthesizer {
     }
 
 	/**
-	*	Create Synthesize
+	*	Create Synthesize Method
 	*
 	*	Factory to create the a synthesize object. Currently only accepts synthesize options in array format.
 	*	@param mixed $mixSynthesize The synthesize options. If none are passed it checks for build options from the calling class.
@@ -136,7 +146,7 @@ trait Synthesizer {
 			if(!empty($this->arrSynthesize)){
 				//array settings override all others
 				$this->_mixSynthesizeOptions = $this->arrSynthesize;
-				echo json_encode($this->arrSynthesize);
+				echo json_encode($this->arrSynthesize).PHP_EOL;
 			}else if(isset($this->mixSynthesize)){
 				$this->_mixSynthesizeOptions = $this->mixSynthesize;
 			}else{
@@ -150,7 +160,7 @@ trait Synthesizer {
     }
 
 	/**
-	*	Load Options From File Class
+	*	Load Options From File Method
 	*
 	*	Attempts to load the synthesize options from the JSON file passed.
 	*	@param string $strFileName The name of the JSON file where the options are.
@@ -167,4 +177,14 @@ trait Synthesizer {
 			throw new MissingOptionsFileException($strFileName);
     	}
     }
+
+	/**
+	*	JSON Serialise Method
+	*
+	*	Called by json_* methods so we can control what items are returned.
+	*	@return mixed
+	*/
+	public function jsonSerialize(){
+		return $this->getSynthesize()->jsonSerialize();
+	}
 }

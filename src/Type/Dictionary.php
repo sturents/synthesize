@@ -1,5 +1,6 @@
 <?php
-/*
+/**
+*	File containing the Dictionary class.
 *
 *	@package	Frozensheep\Synthesize
 *	@author		Jacob Wyke <jacob@frozensheep.com>
@@ -10,88 +11,141 @@
 namespace Frozensheep\Synthesize\Type;
 
 use Frozensheep\Synthesize\Type\Type;
+
 /**
-*	Id Class
+*	Dicationary Class
 *
-*	A generic data type for unknown data types.
+*	A Dictionary data type class.
 *
 *	@package	Frozensheep\Synthesize
 *
 */
-class Dictionary extends Type {
+class Dictionary extends Type implements \Iterator, \Countable {
 
-	/*
+	/**
+	*	@var array $_arrKeys The dictionary keys.
+	*/
+	private $_arrKeys = array();
+
+	/**
+	*	@var int $_numPosition The current pointer position for Iteration.
+	*/
+	private $_numPosition = 0;
+
+	/**
+	*	__get Magic Method
 	*
-	*	@Method:		getValue
-	*	@Parameters:	0
-	*	@Description:	Return the object rather than the value
+	*	Handles quick access to properties in the dictionary.
+	*	@param string $strProperty The requested property name.
+	*	@return mixed
+	*/
+    public function __get($strProperty){
+		return $this->get($strProperty);
+    }
+
+	/**
+	*	__set Magic Method
 	*
+	*	Handles setting values.
+	*	@param string $strProperty The property name.
+	*	@param mixed $mixValue The value to set.
+	*	@return null
+	*/
+    public function __set($strProperty, $mixValue){
+		$this->set($strProperty, $mixValue);
+    }
+
+	/**
+	*	To String Method
+	*
+	*	Returns the string form of the data type.
+	*	@return string
+	*/
+	public function __toString(){
+		return '';
+	}
+
+	/**
+	*	Get Value Method
+	*
+	*	Return the object rather than the value.
+	*	@return mixed
 	*/
 	public function &getValue(){
 		return $this;
 	}
 
-	/*
+	/**
+	*	Set Value Method
 	*
-	*	@Method:		isValid
-	*	@Parameters:	1
-	*	@Param-1:		mixValue - Mixed - The value tomethod name
-	*	@Description:	Ensures that the value is an array
-	*
+	*	Sets the value for the property.
+	*	@param mixed $mixValue The value to check.
+	*	@throws TypeException if valud is not valid.
+	*	@return bool
 	*/
-	public function isValid($mixValue){
-		if(is_array($mixValue)){
-
-			return 1;
+	public function setValue($mixValue){
+		if($this->isValid($mixValue) || is_null($mixValue)){
+			$this->mixValue = $mixValue;
+			$this->updateKeys();
+			return true;
 		}else{
-
-			return 0;
+			throw new TypeException($mixValue, get_class($this));
 		}
 	}
 
-	/*
+	/**
+	*	Is Valid Method
 	*
-	*	@Method:		all
-	*	@Parameters:	0
-	*	@Description:	Returns the dictionary array
+	*	Checks to see if the value is value for the given data type. We only accept arrays.
+	*	@param mixed $mixValue The value to check.
+	*	@return bool
+	*/
+	public function isValid($mixValue){
+		if(is_array($mixValue)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	/**
+	*	All Method
 	*
+	*	Returns the dictionary array
+	*	@return array
 	*/
 	public function all(){
-
-		return $this->mixValue;;
+		return $this->mixValue;
 	}
 
-	/*
+	/**
+	*	Keys Method
 	*
-	*	@Method:		keys
-	*	@Parameters:	0
-	*	@Description:	Returns the keys of the dictionary
-	*
+	*	Returns all the keys of the dictionary.
+	*	@return array
 	*/
 	public function keys(){
-
-		return array_keys($this->getValue());
+		return $this->_arrKeys;
 	}
 
-	/*
+	/**
+	*	Replace Method
 	*
-	*	@Method:		replace
-	*	@Parameters:	1
-	*	@Param-1:		arrValues - Array - The dictionary values
-	*	@Description:	Replaces the whole dictionary with a new one
-	*
+	*	Replaces the whole dictionary with a new one.
+	*	@param array $arrDicationary The new dicationary.
+	*	@return void
 	*/
-	public function replace(Array $arrValues){
-		$this->setValue($arrValues);
+	public function replace(Array $arrDicationary){
+		$this->setValue($arrDicationary);
+		$this->updateKeys();
 	}
 
-	/*
+	/**
+	*	Get Method
 	*
-	*	@Method:		get
-	*	@Parameters:	1
-	*	@Param-1:		strKey - String - The value to get
-	*	@Description:	Returns the dictionary value for the key
-	*
+	*	Reurns the value for the given key.
+	*	@param string $strKey The name of the key.
+	*	@return mixed
 	*/
 	public function get($strKey){
 		if($this->has($strKey)){
@@ -101,30 +155,38 @@ class Dictionary extends Type {
 		throw new \Exception();
 	}
 
-	/*
+	/**
+	*	Set Method
 	*
-	*	@Method:		set
-	*	@Parameters:	2
-	*	@Param-1:		strKey - String - The key
-	*	@Param-2:		mixValue - Mixed - The value to set
-	*	@Description:	Sets the value for a key
-	*
+	*	Sets the value for the given key.
+	*	@param string $strKey The name of the key.
+	*	@param mixed $mixValue The value to set.
+	*	@return void
 	*/
 	public function set($strKey, $mixValue){
 		$this->mixValue[$strKey] = $mixValue;
+		$this->updateKeys();
 	}
 
-	/*
+	/**
+	*	Update Keys Method
 	*
-	*	@Method:		has
-	*	@Parameters:	1
-	*	@Param-1:		strKey - String - The value to get
-	*	@Description:	Returns boolean of if this dictionary has the key
+	*	Updates the keys to match the data we have stored.
+	*	@return void
+	*/
+	protected function updateKeys(){
+		$this->_arrKeys = array_keys($this->mixValue);
+	}
+
+	/**
+	*	Has Method
 	*
+	*	Method to see if the dictionary has a key for the given value.
+	*	@param string $strKey The name of the key to check.
+	*	@return boolean
 	*/
 	public function has($strKey){
-
-		return array_key_exists($strKey, $this->mixValue);
+		return in_array($strKey, $this->_arrKeys);
 	}
 
 	public function contains(){
@@ -133,5 +195,83 @@ class Dictionary extends Type {
 
 	public function remove(){
 
+	}
+
+	/**
+	*	Rewind Method
+	*
+	*	Rewind method for the Iterator Interface.
+	*	@return void
+	*/
+	function rewind(){
+		$this->_numPosition = 0;
+	}
+
+	/**
+	*	Current Method
+	*
+	*	Current method for the Iterator Interface.
+	*	@return mixed
+	*/
+	function current(){
+		return $this->get($this->_arrKeys[$this->_numPosition]);
+	}
+
+	/**
+	*	Key Method
+	*
+	*	Key method for the Iterator Interface.
+	*	@return
+	*/
+	function key(){
+		return $this->_arrKeys[$this->_numPosition];
+	}
+
+	/**
+	*	Next Method
+	*
+	*	Next method for the Iterator Interface.
+	*	@return void
+	*/
+	function next(){
+		++$this->_numPosition;
+	}
+
+	/**
+	*	Valid Method
+	*
+	*	Valid method for the Iterator Interface.
+	*	@return boolean
+	*/
+	function valid(){
+		return isset($this->_arrKeys[$this->_numPosition]);
+	}
+
+	/**
+	*	JSON Serialise Method
+	*
+	*	Method for the \JsonSerializable Interface.
+	*	@return mixed
+	*/
+	public function jsonSerialize(){
+		$arrData = array();
+		$this->updateKeys();
+print_r($this->_arrKeys);
+print_r($this->mixValue);
+		foreach($this as $strKey => $mixValue){
+		echo $strKey.PHP_EOL;
+			$arrData[$strKey] = $mixValue;
+		}
+		return $arrData;
+	}
+
+	/**
+	*	Count Method
+	*
+	*	Count method for the \Countable Interface.
+	*	@return int
+	*/
+	public function count(){
+		return count($this->mixValue);
 	}
 }

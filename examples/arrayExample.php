@@ -22,22 +22,16 @@ use Frozensheep\Synthesize\Synthesizer;
 *	@package	Frozensheep\Synthesize
 *
 */
-class ArrayExample {
+class ArrayExample implements \JsonSerializable {
 
 	//include the Sythesizer trait
 	use Synthesizer;
 
 	//set the synthesized variables
 	protected $arrSynthesize = array(
-		'myString' => array('type' => 'string'),
-		'myBool' => array('type' => 'boolean'),
-		'myDouble' => array('type' => 'double'),
-		'myFloat' => array('type' => 'float'),
-		'myInt' => array('type' => 'int'),
-		'myNumber' => array('type' => 'number'),
-		'myObject' => array('type' => 'object'),
-		'myResource' => array('type' => 'resource'),
-		'testing'
+		'name' => array('type' => 'string'),
+		'options' => array('type' => 'dictionary'),
+		'address' => array('json' => false)
 	);
 }
 
@@ -45,11 +39,12 @@ class ArrayExample {
 $objExample = new ArrayExample();
 
 //use the synthesized variables
-$objExample->myString = 'hello world';
-echo $objExample->myString.PHP_EOL;
+$objExample->name = 'frozensheep';
 
-$objExample->myNumber = 123;
-echo $objExample->myNumber.PHP_EOL;
+$objExample->options = array(
+	'name' => 'jacob',
+	'title' => 'mr'
+);
 
-$objExample->testing = 5.34;
-echo $objExample->testing.PHP_EOL;
+$strJSON = json_encode($objExample);
+echo $strJSON.PHP_EOL;

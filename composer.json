@@ -1,7 +1,7 @@
 {
 	"name": "frozensheep/synthesize",
 	"type": "library",
-	"description": "Synthesizer trait to make working with getters/setters easier.",
+	"description": "Synthesizer trait to auto generate getter and setter access for objects.",
 	"keywords": ["synthesize", "synthesizer"],
 	"homepage": "https://github.com/frozensheep/synthesize",
 	"license": "MIT",

@@ -21,7 +21,7 @@ use Frozensheep\Synthesize\Exception\TypeException;
 *	@package	Frozensheep\Synthesize
 *
 */
-class Type implements TypesInterface {
+class Type implements TypesInterface, \JsonSerializable {
 
 	/**
 	*	@var mixed $mixValue The value we are storing.
@@ -36,6 +36,16 @@ class Type implements TypesInterface {
 	*/
 	public function __construct($mixValue = null){
 		$this->setValue($mixValue);
+	}
+
+	/**
+	*	To String Method
+	*
+	*	Returns the string form of the data type.
+	*	@return string
+	*/
+	public function __toString(){
+		return $this->jsonSerialize();
 	}
 
 	/**
@@ -74,5 +84,15 @@ class Type implements TypesInterface {
 	*/
 	public function isValid($mixValue){
 		return true;
+	}
+
+	/**
+	*	JSON Serialise Method
+	*
+	*	Method for the \JsonSerializable Interface.
+	*	@return mixed
+	*/
+	public function jsonSerialize(){
+		return $this->getValue();
 	}
 }

@@ -21,7 +21,7 @@ class Transaction {
 
 	protected $arrSynthesize = array(
 		'amount' => array('type' => 'float'),
-		'description' => array('type' => 'string')
+		'description' => array('type' => 'string', 'default' => 'Super cool product.')
 	};
 }
 

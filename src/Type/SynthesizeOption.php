@@ -27,7 +27,9 @@ class SynthesizeOption extends FixedDictionary {
 	*/
 	protected $arrKeys = array(
 		'type',
-		'default'
+		'default',
+		'json',
+		'readonly'
 	);
 
 	/**
@@ -35,6 +37,8 @@ class SynthesizeOption extends FixedDictionary {
 	*/
 	protected $arrDefaults = array(
 		'type' => 'id',
-		'default' => ''
+		'default' => '',
+		'json' => true,
+		'readonly' => false
 	);
 }

@@ -22,22 +22,27 @@ use Frozensheep\Synthesize\Exception\InvalidJSONException;
 *	@package	Frozensheep\Synthesize
 *
 */
-class Synthesize {
+class Synthesize implements \Iterator, \JsonSerializable {
 
 	/**
-	*	@var array $arrProperties The list of available properties that are synthesized.
+	*	@var array $_arrProperties The list of available properties that are synthesized.
 	*/
-	private $arrProperties = array();
+	private $_arrProperties = array();
 
 	/**
-	*	@var array $arrOptions Array of the synthesize options.
+	*	@var array $_arrOptions Array of the synthesize options.
 	*/
-	private $arrOptions = array();
+	private $_arrOptions = array();
 
 	/**
-	*	@var array $arrData The property data.
+	*	@var array $_arrData The property data.
 	*/
-	private $arrData = array();
+	private $_arrData = array();
+
+	/**
+	*	@var int $_numPosition The current pointer position for Iteration.
+	*/
+	private $_numPosition = 0;
 
 	/**
 	*	Class Constructor
@@ -84,9 +89,9 @@ class Synthesize {
 			}
 
 			$strProperty = $this->_formatPropertyName($strProperty);
-			$this->arrPropeties[] = $strProperty;
-			$this->arrOptions[$strProperty] = new SynthesizeOption($mixOptions);
-			$this->arrData[$strProperty] = $this->_create($this->arrOptions[$strProperty]);
+			$this->_arrProperties[] = $strProperty;
+			$this->_arrOptions[$strProperty] = new SynthesizeOption($mixOptions);
+			$this->_arrData[$strProperty] = $this->_create($this->_arrOptions[$strProperty]);
 		}
 	}
 
@@ -139,7 +144,7 @@ class Synthesize {
 	*/
 	public function getObject($strProperty){
 		$strProperty = $this->_formatPropertyName($strProperty);
-		return $this->arrData[$strProperty];
+		return $this->_arrData[$strProperty];
 	}
 
 	/**
@@ -152,7 +157,7 @@ class Synthesize {
 	*/
 	public function setObject($strProperty, $mixValue){
 		$strProperty = $this->_formatPropertyName($strProperty);
-		$this->arrData[$strProperty] = $mixValue;
+		$this->_arrData[$strProperty] = $mixValue;
 	}
 
 	/**
@@ -176,8 +181,25 @@ class Synthesize {
 	*/
 	public function hasProperty($strProperty){
 		$strProperty = $this->_formatPropertyName($strProperty);
-		if(in_array($strProperty, $this->arrPropeties)){
+		if(in_array($strProperty, $this->_arrProperties)){
 			return true;
+		}
+		return false;
+	}
+
+	/**
+	*	Options Method
+	*
+	*	Returns the SynthesizeOption object for the given property.
+	*	@param string $strProperty The property you want the options for.
+	*	@return Frozensheep\Synthesize\Type\SynthesizeOption|false
+	*/
+	public function options($strProperty){
+		$strProperty = $this->_formatPropertyName($strProperty);
+		if($this->hasProperty($strProperty)){
+			if(array_key_exists($strProperty, $this->_arrOptions)){
+				return $this->_arrOptions[$strProperty];
+			}
 		}
 		return false;
 	}
@@ -186,11 +208,77 @@ class Synthesize {
 	*	Format Property Name Method
 	*
 	*	Converts the property name into something valid and always the same.
-	*
 	*	@param string $strProperty The property to format.
 	*	@return string The converted property name.
 	*/
 	private function _formatPropertyName($strProperty){
 		return strtolower($strProperty);
+	}
+
+	/**
+	*	Rewind Method
+	*
+	*	Rewind method for the Iterator Interface.
+	*	@return void
+	*/
+	function rewind(){
+		$this->_numPosition = 0;
+	}
+
+	/**
+	*	Current Method
+	*
+	*	Current method for the Iterator Interface.
+	*	@return mixed
+	*/
+	function current(){
+		return $this->_arrData[$this->_arrProperties[$this->_numPosition]];
+	}
+
+	/**
+	*	Key Method
+	*
+	*	Key method for the Iterator Interface.
+	*	@return
+	*/
+	function key(){
+		return $this->_arrProperties[$this->_numPosition];
+	}
+
+	/**
+	*	Next Method
+	*
+	*	Next method for the Iterator Interface.
+	*	@return void
+	*/
+	function next(){
+		++$this->_numPosition;
+	}
+
+	/**
+	*	Valid Method
+	*
+	*	Valid method for the Iterator Interface.
+	*	@return boolean
+	*/
+	function valid(){
+		return isset($this->_arrProperties[$this->_numPosition]);
+	}
+
+	/**
+	*	JSON Serialise Method
+	*
+	*	Called by json_* methods so we can control what items are returned.
+	*	@return mixed
+	*/
+	public function jsonSerialize(){
+		$arrData = array();
+
+		foreach($this as $strKey => $objValue){
+			if($this->options($strKey)->json){
+				$arrData[$strKey] = $objValue->jsonSerialize();
+			}
+		}
+		return $arrData;
 	}
 }
