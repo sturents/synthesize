@@ -134,5 +134,4 @@ class Dictionary extends Type {
 	public function remove(){
 
 	}
-
 }

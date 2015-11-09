@@ -1,5 +1,5 @@
 <?php
-/*
+/**
 *	File containing the File Collection class.
 *
 *	@package	Frozensheep\Synthesize
@@ -22,6 +22,5 @@ use Frozensheep\Synthesize\Type\File;
 *
 */
 class FileCollection extends Dictionary {
-
 
 }

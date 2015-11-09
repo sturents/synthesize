@@ -1,5 +1,6 @@
 <?php
-/*
+/**
+*	File containing the Fixed Dictionary class.
 *
 *	@package	Frozensheep\Synthesize
 *	@author		Jacob Wyke <jacob@frozensheep.com>
@@ -10,38 +11,43 @@
 namespace Frozensheep\Synthesize\Type;
 
 use Frozensheep\Synthesize\Type\Dictionary;
+
 /**
-*	Id Class
+*	Fixed Dictionary Class
 *
-*	A generic data type for unknown data types.
+*	An abstract data type for a fixed dictionaries.
 *
 *	@package	Frozensheep\Synthesize
 *
 */
 abstract class FixedDictionary extends Dictionary {
 
+	/**
+	*	@var array $arrKeys The allowed keys.
+	*/
 	protected $arrKeys = array();
+
+	/**
+	*	@var array $arrDefaults The default values.
+	*/
 	protected $arrDefaults = array();
 
-	/*
+	/**
+	*	Class Constructore
 	*
-	*	@Method:		__construct
-	*	@Parameters:	1
-	*	@Param-1:		arrOptions - Array - The options
-	*	@Description:	Ensures that the value is an array
-	*
+	*	@param array $arrDictionary The array of values for the dictionary.
+	*	@return self
 	*/
 	public function __construct(Array $arrDictionary = array()){
 		$this->replace($arrDictionary);
 	}
 
-	/*
+	/**
+	*	Replace Method
 	*
-	*	@Method:		replace
-	*	@Parameters:	1
-	*	@Param-1:		arrDictionary - Array - The dictionary values
-	*	@Description:	Replaces the whole dictionary with a new one
-	*
+	*	Replaces all the values in the dictionary.
+	*	@param array $arrDictionary The array of values for the dictionary.
+	*	@return void
 	*/
 	public function replace(Array $arrDictionary){
 		$this->setValue(array());
@@ -56,14 +62,13 @@ abstract class FixedDictionary extends Dictionary {
 		}
 	}
 
-	/*
+	/**
+	*	Set Method
 	*
-	*	@Method:		set
-	*	@Parameters:	2
-	*	@Param-1:		strKey - String - The key
-	*	@Param-2:		mixValue - Mixed - The value to set
-	*	@Description:	Sets the value for a key
-	*
+	*	Sets the value for the given key.
+	*	@param string $strKey The key name.
+	*	@param mixed $mixValue The value to set.
+	*	@return void
 	*/
 	public function set($strKey, $mixValue){
 		if($this->has($strKey)){
