@@ -1,7 +1,6 @@
 {
 	"name": "frozensheep/synthesize",
 	"type": "library",
-	"version": "0.1",
 	"description": "Synthesizer trait to make working with getters/setters easier.",
 	"keywords": ["synthesize", "synthesizer"],
 	"homepage": "https://github.com/frozensheep/synthesize",
