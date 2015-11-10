@@ -29,6 +29,6 @@ class RangeException extends \RuntimeException {
 	*	@return self
 	*/
 	public function __construct($mixValue, $mixMin, $mixMax){
-		parent::__construct(sprintf('The value "%s" is outside of the allowed range of %d-%d', $mixValue, $mixMin, $mixMax));
+		parent::__construct(sprintf('The value "%s" is outside of the allowed range of %d -> %d', $mixValue, $mixMin, $mixMax));
 	}
 }

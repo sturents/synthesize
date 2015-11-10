@@ -29,6 +29,6 @@ class LengthException extends \RuntimeException {
 	*	@return self
 	*/
 	public function __construct($strString, $mixMin, $mixMax){
-		parent::__construct(sprintf('The string "%s" has a length outside the allowed limits of %d-%d', $strString, $mixMin, $mixMax));
+		parent::__construct(sprintf('The string "%s" has a length outside the allowed limits of %d -> %d', $strString, $mixMin, $mixMax));
 	}
 }

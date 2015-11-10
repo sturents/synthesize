@@ -11,6 +11,7 @@
 namespace Frozensheep\Synthesize\Type;
 
 use Frozensheep\Synthesize\Type\Type;
+use Frozensheep\Synthesize\Exception\RangeException;
 
 /**
 *	Int Class
@@ -31,6 +32,18 @@ class Int extends Type {
 	*/
 	public function isValid($mixValue){
 		if(is_int($mixValue)){
+			if($this->options()->min){
+				if($mixValue<$this->options()->min){
+					throw new RangeException($mixValue, $this->options()->min, $this->options()->max);
+					return false;
+				}
+			}
+			if($this->options()->max){
+				if($mixValue>$this->options()->max){
+					throw new RangeException($mixValue, $this->options()->min, $this->options()->max);
+					return false;
+				}
+			}
 			return true;
 		}
 		return false;
