@@ -194,7 +194,7 @@ class Synthesize implements \Iterator, \JsonSerializable {
 	*	@param string $strProperty The property you want the options for.
 	*	@return Frozensheep\Synthesize\Type\SynthesizeOption|false
 	*/
-	public function options($strProperty){
+	public function &options($strProperty){
 		$strProperty = $this->_formatPropertyName($strProperty);
 		if($this->hasProperty($strProperty)){
 			if(array_key_exists($strProperty, $this->_arrOptions)){
