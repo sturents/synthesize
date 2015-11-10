@@ -29,6 +29,11 @@ class Type implements TypesInterface, \JsonSerializable {
 	protected $mixValue;
 
 	/**
+	*	@var object $_objOptions The options set for this data type.
+	*/
+	private $_objOptions;
+
+	/**
 	*	Class Contructor
 	*
 	*	@param mixed $mixValue An optional value to set on construction.
@@ -56,6 +61,26 @@ class Type implements TypesInterface, \JsonSerializable {
 	*/
 	public function &getValue(){
 		return $this->mixValue;
+	}
+
+	/**
+	*	Set Options Method
+	*
+	*	@param \Frozensheep\Synthesize\Type\SynthesizeOption $objOption The options about what data object is required.
+	*	@return void
+	*/
+	public function setOptions(SynthesizeOption $objOptions){
+		$this->_objOptions = $objOptions;
+	}
+
+	/**
+	*	Options Method
+	*
+	*	Returns the SynthesizeOption object for the given property.
+	*	@return Frozensheep\Synthesize\Type\SynthesizeOption
+	*/
+	public function &options(){
+		return $this->_objOptions;
 	}
 
 	/**

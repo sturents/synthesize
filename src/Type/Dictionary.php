@@ -175,7 +175,11 @@ class Dictionary extends Type implements \Iterator, \Countable {
 	*	@return void
 	*/
 	protected function updateKeys(){
-		$this->_arrKeys = array_keys($this->mixValue);
+		if(is_array($this->mixValue)){
+			$this->_arrKeys = array_keys($this->mixValue);
+		}else{
+			$this->_arrKeys = array();
+		}
 	}
 
 	/**
