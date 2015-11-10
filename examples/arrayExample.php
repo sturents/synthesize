@@ -29,9 +29,11 @@ class ArrayExample implements \JsonSerializable {
 
 	//set the synthesized variables
 	protected $arrSynthesize = array(
-		'name' => array('type' => 'string'),
+		'name' => array('type' => 'string', 'max' => 20),
 		'options' => array('type' => 'dictionary'),
-		'address' => array('json' => false)
+		'address' => array('json' => false),
+		'latitude' => array('type' => 'float', 'max' => 90.0, 'min' => -90.0),
+		'type' => array('type' => 'int', 'max' => 90, 'min' => -15),
 	);
 }
 
@@ -45,6 +47,10 @@ $objExample->options = array(
 	'name' => 'jacob',
 	'title' => 'mr'
 );
+
+$objExample->latitude = 35.23;
+
+$objExample->type = 3;
 
 $strJSON = json_encode($objExample);
 echo $strJSON.PHP_EOL;
