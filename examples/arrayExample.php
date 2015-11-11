@@ -34,6 +34,8 @@ class ArrayExample implements \JsonSerializable {
 		'address' => array('json' => false),
 		'latitude' => array('type' => 'float', 'max' => 90.0, 'min' => -90.0),
 		'type' => array('type' => 'int', 'max' => 90, 'min' => -15),
+		'date' => array('type' => 'datetime', 'format' => 'd-m-Y G:i:s'),
+		'object' => array('type' => 'object', 'class' => '\DateTime', 'json' => false)
 	);
 }
 
@@ -51,6 +53,10 @@ $objExample->options = array(
 $objExample->latitude = 35.23;
 
 $objExample->type = 3;
+
+$objExample->date = '2015-12-11 12:35:45';
+
+$objExample->object = new DateTime();
 
 $strJSON = json_encode($objExample);
 echo $strJSON.PHP_EOL;
