@@ -146,7 +146,6 @@ trait Synthesizer {
 			if(!empty($this->arrSynthesize)){
 				//array settings override all others
 				$this->_mixSynthesizeOptions = $this->arrSynthesize;
-				echo json_encode($this->arrSynthesize).PHP_EOL;
 			}else if(isset($this->mixSynthesize)){
 				$this->_mixSynthesizeOptions = $this->mixSynthesize;
 			}else{
