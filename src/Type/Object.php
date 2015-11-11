@@ -11,6 +11,7 @@
 namespace Frozensheep\Synthesize\Type;
 
 use Frozensheep\Synthesize\Type\Type;
+use Frozensheep\Synthesize\Exception\ClassException;
 
 /**
 *	Object Class
@@ -30,7 +31,20 @@ class Object extends Type {
 	*	@return bool
 	*/
 	public function isValid($mixValue){
+		if(is_null($mixValue)){
+			return true;
+		}
+
 		if(is_object($mixValue)){
+			if($this->options()->class){
+				$strClass = $this->options()->class;
+				if($mixValue instanceof $strClass){
+					return true;
+				}else{
+					throw new ClassException($mixValue, $strClass);
+					return false;
+				}
+			}
 			return true;
 		}
 		return false;

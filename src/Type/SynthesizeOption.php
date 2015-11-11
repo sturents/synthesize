@@ -30,6 +30,8 @@ class SynthesizeOption extends FixedDictionary {
 		'default',
 		'min',
 		'max',
+		'format',
+		'class',
 		'json',
 		'readonly'
 	);
@@ -42,6 +44,8 @@ class SynthesizeOption extends FixedDictionary {
 		'default' => '',
 		'min' => null,
 		'max' => null,
+		'format' => null,
+		'class' => null,
 		'json' => true,
 		'readonly' => false
 	);
