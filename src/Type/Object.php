@@ -24,6 +24,23 @@ use Frozensheep\Synthesize\Exception\ClassException;
 class Object extends Type {
 
 	/**
+	*	Class Contructor
+	*
+	*	@param mixed $mixValue An optional value to set on construction.
+	*	@return self
+	*/
+	public function __construct($mixValue = null){
+		if(is_null($mixValue)){
+			if($this->options()->class){
+				$strClass = $this->options()->class;
+				$mixValue = new $strClass;
+			}
+		}
+
+		$this->setValue($mixValue);
+	}
+
+	/**
 	*	Is Valid Method
 	*
 	*	Checks to see if the value is valud for the given data type.
