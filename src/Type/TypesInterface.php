@@ -20,6 +20,14 @@ namespace Frozensheep\Synthesize\Type;
 interface TypesInterface {
 
 	/**
+	*	Setup Method
+	*
+	*	Called after the object is created by the TypeFactory to finish any setup required.
+	*	@return void
+	*/
+	public function setup();
+
+	/**
 	*	Get Value Method
 	*
 	*	Returns the value for the property.

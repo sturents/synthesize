@@ -34,16 +34,6 @@ class Type implements TypesInterface, \JsonSerializable {
 	private $_objOptions;
 
 	/**
-	*	Class Contructor
-	*
-	*	@param mixed $mixValue An optional value to set on construction.
-	*	@return self
-	*/
-	public function __construct($mixValue = null){
-		$this->setValue($mixValue);
-	}
-
-	/**
 	*	To String Method
 	*
 	*	Returns the string form of the data type.
@@ -51,6 +41,18 @@ class Type implements TypesInterface, \JsonSerializable {
 	*/
 	public function __toString(){
 		return $this->jsonSerialize();
+	}
+
+	/**
+	*	Setup Method
+	*
+	*	Called after the object is created by the TypeFactory to finish any setup required.
+	*	@return void
+	*/
+	public function setup(){
+		if($this->options()->default){
+			$this->setValue($this->options()->default);
+		}
 	}
 
 	/**

@@ -38,6 +38,7 @@ class TypeFactory {
 
 		$objObject = new $strType();
 		$objObject->setOptions($objOptions);
+		$objObject->setup();
 		return $objObject;
 	}
 }

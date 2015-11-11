@@ -30,12 +30,14 @@ class ArrayExample implements \JsonSerializable {
 	//set the synthesized variables
 	protected $arrSynthesize = array(
 		'name' => array('type' => 'string', 'max' => 20),
+		'email' => array('type' => 'string', 'max' => 20, 'default' => 'me@example.com'),
 		'options' => array('type' => 'dictionary'),
 		'address' => array('json' => false),
 		'latitude' => array('type' => 'float', 'max' => 90.0, 'min' => -90.0),
 		'type' => array('type' => 'int', 'max' => 90, 'min' => -15),
 		'date' => array('type' => 'datetime', 'format' => 'd-m-Y G:i:s'),
-		'object' => array('type' => 'object', 'class' => '\DateTime', 'json' => false)
+		'object' => array('type' => 'object', 'class' => '\DateTime'),
+		'object2' => array('type' => 'object', 'class' => '\DateTime', 'autoinit' => false)
 	);
 }
 
@@ -56,7 +58,7 @@ $objExample->type = 3;
 
 $objExample->date = '2015-12-11 12:35:45';
 
-$objExample->object = new DateTime();
+
 
 $strJSON = json_encode($objExample);
 echo $strJSON.PHP_EOL;

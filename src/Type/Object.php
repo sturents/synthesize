@@ -24,20 +24,16 @@ use Frozensheep\Synthesize\Exception\ClassException;
 class Object extends Type {
 
 	/**
-	*	Class Contructor
+	*	Setup Method
 	*
-	*	@param mixed $mixValue An optional value to set on construction.
-	*	@return self
+	*	Called after the object is created by the TypeFactory to finish any setup required.
+	*	@return void
 	*/
-	public function __construct($mixValue = null){
-		if(is_null($mixValue)){
-			if($this->options()->class){
-				$strClass = $this->options()->class;
-				$mixValue = new $strClass;
-			}
+	public function setup(){
+		if($this->options()->autoinit && $this->options()->class){
+			$strClass = $this->options()->class;
+			$this->setValue(new $strClass);
 		}
-
-		$this->setValue($mixValue);
 	}
 
 	/**
