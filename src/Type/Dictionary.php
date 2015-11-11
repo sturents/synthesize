@@ -193,13 +193,13 @@ class Dictionary extends Type implements \Iterator, \Countable {
 		return in_array($strKey, $this->_arrKeys);
 	}
 
-	public function contains(){
+	//public function contains(){
+	//
+	//}
 
-	}
-
-	public function remove(){
-
-	}
+	//public function remove(){
+	//
+	//}
 
 	/**
 	*	Rewind Method
@@ -260,10 +260,8 @@ class Dictionary extends Type implements \Iterator, \Countable {
 	public function jsonSerialize(){
 		$arrData = array();
 		$this->updateKeys();
-print_r($this->_arrKeys);
-print_r($this->mixValue);
+
 		foreach($this as $strKey => $mixValue){
-		echo $strKey.PHP_EOL;
 			$arrData[$strKey] = $mixValue;
 		}
 		return $arrData;
