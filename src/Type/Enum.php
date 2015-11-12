@@ -53,6 +53,6 @@ class Enum extends Type {
 	*/
 	public function setValue($mixValue){
 		$strClass = $this->options()->class;
-		$this->mixValue = new {$strClass}($mixValue);
+		$this->mixValue = new $strClass($mixValue);
 	}
 }
