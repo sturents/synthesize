@@ -11,6 +11,8 @@
 //include the composer autoloader
 require_once(__DIR__.'/../vendor/autoload.php');
 
+include('Months.php');
+
 //use the Synthesizer
 use Frozensheep\Synthesize\Synthesizer;
 
@@ -37,7 +39,8 @@ class ArrayExample implements \JsonSerializable {
 		'type' => array('type' => 'int', 'max' => 90, 'min' => -15),
 		'date' => array('type' => 'datetime', 'format' => 'd-m-Y G:i:s'),
 		'object' => array('type' => 'object', 'class' => '\DateTime'),
-		'object2' => array('type' => 'object', 'class' => '\DateTime', 'autoinit' => false)
+		'object2' => array('type' => 'object', 'class' => '\DateTime', 'autoinit' => false),
+		'month'  => array('type' => 'enum', 'class' => '\Months'),
 	);
 }
 
@@ -58,7 +61,7 @@ $objExample->type = 3;
 
 $objExample->date = '2015-12-11 12:35:45';
 
-
+$objExample->month = 4;
 
 $strJSON = json_encode($objExample);
 echo $strJSON.PHP_EOL;
