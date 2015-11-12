@@ -40,7 +40,11 @@ class Enum extends Type {
 	*	@return mixed
 	*/
 	public function &getValue(){
-		return $this->mixValue->getValue();
+		if(is_object($this->mixValue)){
+			return $this->mixValue->getValue();
+		}
+
+		return null;
 	}
 
 	/**
