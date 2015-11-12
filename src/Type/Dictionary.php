@@ -266,7 +266,7 @@ class Dictionary extends Type implements \Iterator, \Countable {
 				$arrData[$strKey] = $mixValue;
 			}
 		}
-		return $arrData;
+		return count($arrData) ? $arrData : null;
 	}
 
 	/**
