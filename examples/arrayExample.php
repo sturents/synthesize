@@ -42,7 +42,8 @@ class ArrayExample implements \JsonSerializable {
 		'object2' => array('type' => 'object', 'class' => '\DateTime', 'autoinit' => false),
 		'month'  => array('type' => 'enum', 'class' => '\Months'),
 		'array' => array('type' => 'arrayobject'),
-		'array2' => array('type' => 'objectarray', 'class' => '\DateTime')
+		'array2' => array('type' => 'objectarray', 'class' => '\DateTime'),
+		'features' => array('type' => 'objectarray', 'class' => 'Frozensheep\Synthesize\Type\String', 'max' => 10)
 	);
 }
 
@@ -74,6 +75,11 @@ try{
 }catch (Exception $e){
 	echo "Invalid class type".PHP_EOL;
 }
+
+$objExample->features[] = new Frozensheep\Synthesize\Type\String('testing');
+$objExample->features[] = new Frozensheep\Synthesize\Type\String('testing2');
+$objExample->features[] = new Frozensheep\Synthesize\Type\String('testing3');
+$objExample->features[] = new Frozensheep\Synthesize\Type\String('testing4');
 
 $strJSON = json_encode($objExample);
 echo $strJSON.PHP_EOL;
