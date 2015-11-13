@@ -160,7 +160,7 @@ class ArrayObject extends Type implements \Iterator, \ArrayAccess, \Countable {
 	*	@return mixed
 	*/
 	public function jsonSerialize(){
-		return $this->mixValue;
+		return count($this->mixValue) ? $this->mixValue : null;
 	}
 
 	/**
