@@ -62,4 +62,14 @@ class Object extends Type {
 		}
 		return false;
 	}
+
+	/**
+	*	JSON Serialise Method
+	*
+	*	Method for the \JsonSerializable Interface.
+	*	@return mixed
+	*/
+	public function jsonSerialize(){
+		return is_object($this->mixValue) ? $this->mixValue : null;
+	}
 }
