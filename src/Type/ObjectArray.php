@@ -32,12 +32,16 @@ class ObjectArray extends ArrayObject {
 	*	@return void
 	*/
 	public function offsetSet($mixOffset, $mixValue){
+		$strClass = $this->options()->class;
+
 		if(is_object($mixValue)){
-			$this->setValue($mixValue);
-		}else{
-			$strClass = $this->options()->class;
-			$this->setValue(new $strClass($mixValue));
+			if($mixValue instanceof $strClass){
+				$this->mixValue[] = $mixValue
+			}
 		}
+
+		//fall back to putting the value into a class
+		$this->mixValue[] = new $strClass($mixValue);
 	}
 
 	/**
