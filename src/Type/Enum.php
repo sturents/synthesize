@@ -34,20 +34,6 @@ class Enum extends Type {
 	}
 
 	/**
-	*	Get Value Method
-	*
-	*	Returns the value for the property.
-	*	@return mixed
-	*/
-	public function getValue(){
-		if(is_object($this->mixValue)){
-			return $this->mixValue->getValue();
-		}
-
-		return null;
-	}
-
-	/**
 	*	Set Value Method
 	*
 	*	Sets the value for the property.
