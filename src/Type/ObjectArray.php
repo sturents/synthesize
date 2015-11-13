@@ -24,6 +24,23 @@ use Frozensheep\Synthesize\Exception\ClassException;
 class ObjectArray extends ArrayObject {
 
 	/**
+	*	Offset Set Method
+	*
+	*	Offset Set method for the \ArrayAccess Interface.
+	*	@param mixed $mixOffset The array offset/key.
+	*	@param mixed $mixValue The value to set.
+	*	@return void
+	*/
+	public function offsetSet($mixOffset, $mixValue){
+		if(is_object($mixValue)){
+			$this->setValue($mixValue);
+		}else{
+			$strClass = $this->options()->class;
+			$this->setValue(new $strClass($mixValue));
+		}
+	}
+
+	/**
 	*	Is Valid Method
 	*
 	*	Checks to see if the value is value for the given data type. We only accept arrays.
