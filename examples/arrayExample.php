@@ -41,6 +41,8 @@ class ArrayExample implements \JsonSerializable {
 		'object' => array('type' => 'object', 'class' => '\DateTime'),
 		'object2' => array('type' => 'object', 'class' => '\DateTime', 'autoinit' => false),
 		'month'  => array('type' => 'enum', 'class' => '\Months'),
+		'array' => array('type' => 'arrayobject'),
+		'array2' => array('type' => 'objectarray', 'class' => '\DateTime')
 	);
 }
 
@@ -62,6 +64,16 @@ $objExample->type = 3;
 $objExample->date = '2015-12-11 12:35:45';
 
 $objExample->month = 4;
+
+$objExample->array[] = 'hello';
+$objExample->array[] = 'world';
+
+$objExample->array2[] = new DateTime();
+try{
+	$objExample->array2[] = new ArrayExample();
+}catch (Exception $e){
+	echo "Invalid class type".PHP_EOL;
+}
 
 $strJSON = json_encode($objExample);
 echo $strJSON.PHP_EOL;
