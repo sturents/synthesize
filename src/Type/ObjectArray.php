@@ -36,7 +36,7 @@ class ObjectArray extends ArrayObject {
 
 		if(is_object($mixValue)){
 			if($mixValue instanceof $strClass){
-				$this->mixValue[] = $mixValue
+				$this->mixValue[] = $mixValue;
 			}
 		}
 
