@@ -34,6 +34,20 @@ class Enum extends Type {
 	}
 
 	/**
+	*	Get Value Method
+	*
+	*	Returns the value for the property.
+	*	@return mixed
+	*/
+	public function getValue(){
+		if(is_object($this->mixValue)){
+			return $this->mixValue;
+		}
+
+		return null;
+	}
+
+	/**
 	*	Set Value Method
 	*
 	*	Sets the value for the property.
@@ -44,5 +58,15 @@ class Enum extends Type {
 	public function setValue($mixValue){
 		$strClass = $this->options()->class;
 		$this->mixValue = new $strClass($mixValue);
+	}
+
+	/**
+	*	JSON Serialise Method
+	*
+	*	Method for the \JsonSerializable Interface.
+	*	@return mixed
+	*/
+	public function jsonSerialize(){
+		return $this->getValue();
 	}
 }

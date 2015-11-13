@@ -43,7 +43,8 @@ class ArrayExample implements \JsonSerializable {
 		'month'  => array('type' => 'enum', 'class' => '\Months'),
 		'array' => array('type' => 'arrayobject'),
 		'array2' => array('type' => 'objectarray', 'class' => '\DateTime'),
-		'features' => array('type' => 'objectarray', 'class' => 'Frozensheep\Synthesize\Type\String', 'max' => 10)
+		'features' => array('type' => 'objectarray', 'class' => 'Frozensheep\Synthesize\Type\String', 'max' => 10),
+		'months' => array('type' => 'objectarray', 'class' => 'Months', 'max' => 10)
 	);
 }
 
@@ -69,6 +70,7 @@ $objExample->month = 4;
 $objExample->array[] = 'hello';
 $objExample->array[] = 'world';
 
+$objExample->array2[] = 'now';
 $objExample->array2[] = new DateTime();
 try{
 	$objExample->array2[] = new ArrayExample();
@@ -78,8 +80,11 @@ try{
 
 $objExample->features[] = 'testing';
 $objExample->features[] = 'testing2';
-$objExample->features[] = 'testing3';
-$objExample->features[] = 'testing4';
+
+$objExample->months[] = 1;
+$objExample->months[] = 4;
+$objExample->months[] = 8;
+
 
 $strJSON = json_encode($objExample);
 echo $strJSON.PHP_EOL;

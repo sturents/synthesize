@@ -22,7 +22,7 @@ use MyCLabs\Enum\Enum;
 *	@package		Frozensheep\RightmoveADF\Groups
 *
 */
-class Months extends Enum {
+class Months extends Enum implements \JsonSerializable {
 
 	const January = 1;
 	const February = 2;
@@ -36,4 +36,14 @@ class Months extends Enum {
 	const October = 10;
 	const November = 11;
 	const December = 12;
+
+	/**
+	*	JSON Serialise Method
+	*
+	*	Method for the \JsonSerializable Interface.
+	*	@return mixed
+	*/
+	public function jsonSerialize(){
+		return $this->getValue();
+	}
 }
