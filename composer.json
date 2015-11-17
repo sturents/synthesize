@@ -18,7 +18,8 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Frozensheep\\Synthesize\\": "src"
+			"Frozensheep\\Synthesize\\": "src",
+			"Frozensheep\\Synthesize\\Tests\\": "tests"
 		}
 	}
 }

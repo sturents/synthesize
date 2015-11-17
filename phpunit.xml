@@ -14,8 +14,7 @@
 
     <testsuites>
         <testsuite name="Synthesize Test Suite">
-            <directory>tests/</directory>
-            <directory>src/*/</directory>
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
 

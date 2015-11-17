@@ -34,7 +34,7 @@ class SynthesizeOption extends FixedDictionary {
 		'class',
 		'json',
 		'jsonnull',
-		'readonly',
+		//'readonly',
 		'autoinit'
 	);
 
@@ -50,7 +50,7 @@ class SynthesizeOption extends FixedDictionary {
 		'class' => null,
 		'json' => true,
 		'jsonnull' => false,
-		'readonly' => false,
+		//'readonly' => false,
 		'autoinit' => true
 	);
 }

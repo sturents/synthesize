@@ -28,6 +28,6 @@ class TypeException extends \RuntimeException {
 	*	@return self
 	*/
     public function __construct($mixValue, $strExpectedType){
-        parent::__construct(sprintf('Expected value of type %s, %s given', $strExpectedType, gettype(mixValue)));
+        parent::__construct(sprintf('Expected value of type %s, %s given', $strExpectedType, gettype($mixValue)));
     }
 }
