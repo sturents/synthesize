@@ -105,25 +105,6 @@ class IntTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals(9, $this->objInt->int3);
 	}
 
-	public function testJSON(){
-		$this->objInt->int = null;
-		$this->objInt->int2 = null;
-		$this->objInt->int3 = null;
-		$this->objInt->int4 = null;
-		$this->objInt->int5 = null;
-
-		//everything is null - only int4 shows null
-		$strExpecetedJSON = '{"int4":null}';
-		$strJSON = json_encode($this->objInt);
-		$this->assertEquals($strExpecetedJSON, $strJSON);
-
-		//int is set to 5
-		$this->objInt->int = 5;
-		$strExpecetedJSON = '{"int":5,"int4":null}';
-		$strJSON = json_encode($this->objInt);
-		$this->assertEquals($strExpecetedJSON, $strJSON);
-	}
-
 	public function testJSONOutput(){
 		$this->objInt->int = 5;
 		$this->objInt->int2 = -3;
