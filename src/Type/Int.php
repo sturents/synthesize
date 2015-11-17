@@ -32,16 +32,18 @@ class Int extends Type {
 	*/
 	public function isValid($mixValue){
 		if(is_int($mixValue)){
-			if(!is_null($this->options()->min)){
-				if($mixValue<$this->options()->min){
-					throw new RangeException($mixValue, $this->options()->min, $this->options()->max);
-					return false;
+			if($this->options()){
+				if(!is_null($this->options()->min)){
+					if($mixValue<$this->options()->min){
+						throw new RangeException($mixValue, $this->options()->min, $this->options()->max);
+						return false;
+					}
 				}
-			}
-			if(!is_null($this->options()->max)){
-				if($mixValue>$this->options()->max){
-					throw new RangeException($mixValue, $this->options()->min, $this->options()->max);
-					return false;
+				if(!is_null($this->options()->max)){
+					if($mixValue>$this->options()->max){
+						throw new RangeException($mixValue, $this->options()->min, $this->options()->max);
+						return false;
+					}
 				}
 			}
 			return true;

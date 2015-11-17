@@ -33,13 +33,13 @@ class String extends Type {
 	public function isValid($mixValue){
 		if(is_string($mixValue)){
 			if($this->options()){
-				if($this->options()->min){
+				if(!is_null($this->options()->min)){
 					if(mb_strlen($mixValue)<$this->options()->min){
 						throw new LengthException($mixValue, $this->options()->min, $this->options()->max);
 						return false;
 					}
 				}
-				if($this->options()->max){
+				if(!is_null($this->options()->max)){
 					if(mb_strlen($mixValue)>$this->options()->max){
 						throw new LengthException($mixValue, $this->options()->min, $this->options()->max);
 						return false;
