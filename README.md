@@ -2,9 +2,9 @@
 
 Synthesizer trait to auto generate getter and setter access for objects.
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/frozensheep/synthesize.svg?style=flat-square)](https://packagist.org/frozensheep/synthesize)
-[![Build Status](https://img.shields.io/travis/frozensheep/synthesize/master.svg?style=flat-square)](https://img.shields.io/travis/frozensheep/synthesize.svg)
-[![MIT License](https://img.shields.io/packagist/l/frozensheep/synthesize.svg?style=flat-square)](https://packagist.org/frozensheep/synthesize)
+[![Latest Stable Version](https://img.shields.io/packagist/v/frozensheep/synthesize.svg?style=flat-square)](https://packagist.org/packages/frozensheep/synthesize)
+[![Build Status](https://img.shields.io/travis/frozensheep/synthesize/master.svg?style=flat-square)](https://travis-ci.org/frozensheep/synthesize)
+[![MIT License](https://img.shields.io/packagist/l/frozensheep/synthesize.svg?style=flat-square)](https://github.com/frozensheep/synthesize/blob/master/LICENSE)
 [![PHP 5.4](https://img.shields.io/badge/php-5.4-8892BF.svg?style=flat-square)](https://php.net/)
 [![PHP 5.5](https://img.shields.io/badge/php-5.5-8892BF.svg?style=flat-square)](https://php.net/)
 [![PHP 5.6](https://img.shields.io/badge/php-5.6-8892BF.svg?style=flat-square)](https://php.net/)
