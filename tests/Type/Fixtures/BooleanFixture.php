@@ -11,9 +11,9 @@ class BooleanFixture implements \JsonSerializable {
 
 	//set the synthesized variables
 	protected $arrSynthesize = array(
-		'boolean' => array('type' => 'boolean'),
-		'boolean1' => array('type' => 'boolean'),
-		'boolean2' => array('type' => 'boolean', 'default' => true),
+		'boolean' => array('type' => 'Boolean'),
+		'boolean1' => array('type' => 'Boolean'),
+		'boolean2' => array('type' => 'Boolean', 'default' => true),
 		'boolean4' => array('type' => 'boolean', 'jsonnull' => true),
 		'boolean5' => array('type' => 'boolean', 'json' => false)
 	);
