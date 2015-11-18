@@ -60,6 +60,10 @@ class TypeFactoryTest extends \PHPUnit_Framework_TestCase {
 			"string" => array(
 				array('type' => 'string'),
 				'Frozensheep\Synthesize\Type\String'
+			),
+			"default" => array(
+				array(),
+				'Frozensheep\Synthesize\Type\Id'
 			)
 		);
 	}

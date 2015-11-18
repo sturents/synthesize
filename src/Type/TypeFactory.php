@@ -36,9 +36,7 @@ class TypeFactory {
 			throw new UnknownTypeException($strType);
 		}
 
-		$objObject = new $strType();
-		$objObject->setOptions($objOptions);
-		$objObject->setup();
+		$objObject = new $strType(null, $objOptions);
 		return $objObject;
 	}
 }
