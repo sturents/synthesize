@@ -31,7 +31,7 @@ class TypeFactory {
 	*	return object The object for the type created.
 	*/
 	static public function create(SynthesizeOption $objOptions){
-		$strType = 'Frozensheep\\Synthesize\\Type\\'.$objOptions->type;
+		$strType = 'Frozensheep\\Synthesize\\Type\\'.ucfirst($objOptions->type);
 		if(!class_exists($strType)){
 			throw new UnknownTypeException($strType);
 		}
