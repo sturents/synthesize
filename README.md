@@ -6,7 +6,7 @@ Synthesizer trait to auto generate getter and setter access for objects.
 [![Build Status](https://img.shields.io/travis/frozensheep/synthesize/master.svg?style=flat-square)](https://img.shields.io/travis/frozensheep/synthesize.svg)
 [![MIT License](https://img.shields.io/packagist/l/frozensheep/synthesize.svg?style=flat-square)](https://packagist.org/frozensheep/synthesize)
 [![PHP 5.4](https://img.shields.io/badge/php-5.4-8892BF.svg?style=flat-square)](https://php.net/)
-[![PHP 5.5](https://img.shields.io/badge/php-05.5-8892BF.svg?style=flat-square)](https://php.net/)
+[![PHP 5.5](https://img.shields.io/badge/php-5.5-8892BF.svg?style=flat-square)](https://php.net/)
 [![PHP 5.6](https://img.shields.io/badge/php-5.6-8892BF.svg?style=flat-square)](https://php.net/)
 [![PHP 7](https://img.shields.io/badge/php-7-8892BF.svg?style=flat-square)](https://php.net/)
 
