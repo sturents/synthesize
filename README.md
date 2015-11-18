@@ -2,6 +2,9 @@
 
 Synthesizer trait to auto generate getter and setter access for objects.
 
+[![Latest Stable Version](https://img.shields.io/packagist/v/frozensheep/synthesize.svg?style=flat-square)](https://packagist.org/frozensheep/synthesize)
+[![Build Status](https://img.shields.io/travis/frozensheep/synthesize/master.svg?style=flat-square)](https://img.shields.io/travis/frozensheep/synthesize.svg)
+
 ## Install
 
 To install with Composer:
