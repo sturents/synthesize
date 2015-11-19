@@ -1,6 +1,6 @@
 <?php
 /**
-*	File Containing the String class.
+*	File Containing the String Object class.
 *
 *	@package	Frozensheep\Synthesize
 *	@author		Jacob Wyke <jacob@frozensheep.com>
@@ -14,14 +14,14 @@ use Frozensheep\Synthesize\Type\Type;
 use Frozensheep\Synthesize\Exception\LengthException;
 
 /**
-*	String Class
+*	String Object Class
 *
 *	A string data class.
 *
 *	@package	Frozensheep\Synthesize
 *
 */
-class String extends Type {
+class StringObject extends Type {
 
 	/**
 	*	Is Valid Method

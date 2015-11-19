@@ -1,6 +1,6 @@
 <?php
 /**
-*	File containing the Type Array class.
+*	File containing the Type Array Object class.
 *
 *	@package	Frozensheep\Synthesize
 *	@author		Jacob Wyke <jacob@frozensheep.com>
@@ -13,7 +13,7 @@ namespace Frozensheep\Synthesize\Type;
 use Frozensheep\Synthesize\Type\Type;
 
 /**
-*	Array Class
+*	Array Object Class
 *
 *	An array data type class. Only allows items of the allowed type.
 *

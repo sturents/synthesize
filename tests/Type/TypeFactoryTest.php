@@ -15,55 +15,55 @@ class TypeFactoryTest extends \PHPUnit_Framework_TestCase {
 			),
 			"boolean" => array(
 				array('type' => 'boolean'),
-				'Frozensheep\Synthesize\Type\Boolean'
+				'Frozensheep\Synthesize\Type\BooleanObject'
 			),
 			"dateTime" => array(
 				array('type' => 'dateTime'),
-				'Frozensheep\Synthesize\Type\DateTime'
+				'Frozensheep\Synthesize\Type\DateTimeObject'
 			),
 			"dictionary" => array(
 				array('type' => 'dictionary'),
-				'Frozensheep\Synthesize\Type\Dictionary'
+				'Frozensheep\Synthesize\Type\DictionaryObject'
 			),
 			"enum" => array(
 				array('type' => 'enum'),
-				'Frozensheep\Synthesize\Type\Enum'
+				'Frozensheep\Synthesize\Type\EnumObject'
 			),
 			"float" => array(
 				array('type' => 'float'),
-				'Frozensheep\Synthesize\Type\Float'
+				'Frozensheep\Synthesize\Type\FloatObject'
 			),
 			"id" => array(
 				array('type' => 'id'),
-				'Frozensheep\Synthesize\Type\Id'
+				'Frozensheep\Synthesize\Type\IdObject'
 			),
 			"int" => array(
 				array('type' => 'int'),
-				'Frozensheep\Synthesize\Type\Int'
+				'Frozensheep\Synthesize\Type\IntObject'
 			),
 			"number" => array(
 				array('type' => 'number'),
-				'Frozensheep\Synthesize\Type\Number'
+				'Frozensheep\Synthesize\Type\NumberObject'
 			),
 			"object" => array(
 				array('type' => 'object'),
-				'Frozensheep\Synthesize\Type\Object'
+				'Frozensheep\Synthesize\Type\ObjectObject'
 			),
 			"objectArray" => array(
 				array('type' => 'objectArray'),
-				'Frozensheep\Synthesize\Type\ObjectArray'
+				'Frozensheep\Synthesize\Type\ObjectArrayObject'
 			),
 			"resource" => array(
 				array('type' => 'resource'),
-				'Frozensheep\Synthesize\Type\Resource'
+				'Frozensheep\Synthesize\Type\ResourceObject'
 			),
 			"string" => array(
 				array('type' => 'string'),
-				'Frozensheep\Synthesize\Type\String'
+				'Frozensheep\Synthesize\Type\StringObject'
 			),
 			"default" => array(
 				array(),
-				'Frozensheep\Synthesize\Type\Id'
+				'Frozensheep\Synthesize\Type\IdObject'
 			)
 		);
 	}

@@ -1,6 +1,6 @@
 <?php
 /**
-*	File Containing the Object class.
+*	File Containing the Object Object class.
 *
 *	@package	Frozensheep\Synthesize
 *	@author		Jacob Wyke <jacob@frozensheep.com>
@@ -14,14 +14,14 @@ use Frozensheep\Synthesize\Type\Type;
 use Frozensheep\Synthesize\Exception\ClassException;
 
 /**
-*	Object Class
+*	Object Object Class
 *
 *	An object data class.
 *
 *	@package	Frozensheep\Synthesize
 *
 */
-class Object extends Type {
+class ObjectObject extends Type {
 
 	/**
 	*	Setup Method

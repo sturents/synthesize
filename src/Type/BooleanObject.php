@@ -1,6 +1,6 @@
 <?php
 /**
-*	File Containing the Resource class.
+*	File Containing the Boolean Object class.
 *
 *	@package	Frozensheep\Synthesize
 *	@author		Jacob Wyke <jacob@frozensheep.com>
@@ -13,14 +13,14 @@ namespace Frozensheep\Synthesize\Type;
 use Frozensheep\Synthesize\Type\Type;
 
 /**
-*	Resource Class
+*	Boolean Object Class
 *
-*	A resource data class.
+*	A boolean data class.
 *
 *	@package	Frozensheep\Synthesize
 *
 */
-class Resource extends Type {
+class BooleanObject extends Type {
 
 	/**
 	*	Is Valid Method
@@ -30,7 +30,7 @@ class Resource extends Type {
 	*	@return bool
 	*/
 	public function isValid($mixValue){
-		if(is_resource($mixValue)){
+		if(is_bool($mixValue)){
 			return true;
 		}
 		return false;

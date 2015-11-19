@@ -1,6 +1,6 @@
 <?php
 /**
-*	File containing the Dictionary class.
+*	File containing the Dictionary Object class.
 *
 *	@package	Frozensheep\Synthesize
 *	@author		Jacob Wyke <jacob@frozensheep.com>
@@ -13,14 +13,14 @@ namespace Frozensheep\Synthesize\Type;
 use Frozensheep\Synthesize\Type\Type;
 
 /**
-*	Dicationary Class
+*	DicationaryObject Class
 *
 *	A Dictionary data type class.
 *
 *	@package	Frozensheep\Synthesize
 *
 */
-class Dictionary extends Type implements \Iterator, \Countable {
+class DictionaryObject extends Type implements \Iterator, \Countable {
 
 	/**
 	*	@var array $_arrKeys The dictionary keys.

@@ -10,7 +10,7 @@
 
 namespace Frozensheep\Synthesize\Type;
 
-use Frozensheep\Synthesize\Type\FixedDictionary;
+use Frozensheep\Synthesize\Type\FixedDictionaryObject;
 
 /**
 *	Synthesize Option Class
@@ -20,7 +20,7 @@ use Frozensheep\Synthesize\Type\FixedDictionary;
 *	@package	Frozensheep\Synthesize
 *
 */
-class SynthesizeOption extends FixedDictionary {
+class SynthesizeOption extends FixedDictionaryObject {
 
 	/**
 	*	@var array $arrKeys The allowed keys.

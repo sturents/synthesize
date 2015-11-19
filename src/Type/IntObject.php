@@ -1,6 +1,6 @@
 <?php
 /**
-*	File Containing the Int class.
+*	File Containing the Int Object class.
 *
 *	@package	Frozensheep\Synthesize
 *	@author		Jacob Wyke <jacob@frozensheep.com>
@@ -14,14 +14,14 @@ use Frozensheep\Synthesize\Type\Type;
 use Frozensheep\Synthesize\Exception\RangeException;
 
 /**
-*	Int Class
+*	Int Object Class
 *
 *	An int data class.
 *
 *	@package	Frozensheep\Synthesize
 *
 */
-class Int extends Type {
+class IntObject extends Type {
 
 	/**
 	*	Is Valid Method

@@ -1,6 +1,6 @@
 <?php
 /**
-*	File containing the Object Array class.
+*	File containing the Object Array Object class.
 *
 *	@package	Frozensheep\Synthesize
 *	@author		Jacob Wyke <jacob@frozensheep.com>
@@ -14,14 +14,14 @@ use Frozensheep\Synthesize\Type\ArrayObject;
 use Frozensheep\Synthesize\Exception\ClassException;
 
 /**
-*	Object Array Class
+*	Object Array Object Class
 *
 *	An Object Array data type class. Only allows items of the allowed class.
 *
 *	@package	Frozensheep\Synthesize
 *
 */
-class ObjectArray extends ArrayObject {
+class ObjectArrayObject extends ArrayObject {
 
 	/**
 	*	Offset Set Method

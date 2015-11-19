@@ -1,6 +1,6 @@
 <?php
 /**
-*	File Containing the Number class.
+*	File Containing the Float Object class.
 *
 *	@package	Frozensheep\Synthesize
 *	@author		Jacob Wyke <jacob@frozensheep.com>
@@ -14,14 +14,14 @@ use Frozensheep\Synthesize\Type\Type;
 use Frozensheep\Synthesize\Exception\RangeException;
 
 /**
-*	Number Class
+*	Float Object Class
 *
-*	A number data class.
+*	A float data class.
 *
 *	@package	Frozensheep\Synthesize
 *
 */
-class Number extends Type {
+class FloatObject extends Type {
 
 	/**
 	*	Is Valid Method
@@ -31,7 +31,7 @@ class Number extends Type {
 	*	@return bool
 	*/
 	public function isValid($mixValue){
-		if(is_numeric($mixValue)){
+		if(is_float($mixValue)){
 			if($this->options()){
 				if(!is_null($this->options()->min)){
 					if($mixValue<$this->options()->min){

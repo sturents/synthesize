@@ -1,6 +1,6 @@
 <?php
 /**
-*	File containing the Id data type class.
+*	File containing the Id Object data type class.
 *
 *	@package	Frozensheep\Synthesize
 *	@author		Jacob Wyke <jacob@frozensheep.com>
@@ -13,13 +13,13 @@ namespace Frozensheep\Synthesize\Type;
 use Frozensheep\Synthesize\Type\Type;
 
 /**
-*	Id Class
+*	Id Object Class
 *
 *	A generic data type for unknown data types.
 *
 *	@package	Frozensheep\Synthesize
 *
 */
-class Id extends Type {
+class IdObject extends Type {
 
 }

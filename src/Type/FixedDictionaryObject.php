@@ -1,6 +1,6 @@
 <?php
 /**
-*	File containing the Fixed Dictionary class.
+*	File containing the Fixed Dictionary Object class.
 *
 *	@package	Frozensheep\Synthesize
 *	@author		Jacob Wyke <jacob@frozensheep.com>
@@ -10,17 +10,17 @@
 
 namespace Frozensheep\Synthesize\Type;
 
-use Frozensheep\Synthesize\Type\Dictionary;
+use Frozensheep\Synthesize\Type\DictionaryObject;
 
 /**
-*	Fixed Dictionary Class
+*	Fixed Dictionary Object Class
 *
 *	An abstract data type for a fixed dictionaries.
 *
 *	@package	Frozensheep\Synthesize
 *
 */
-abstract class FixedDictionary extends Dictionary {
+abstract class FixedDictionaryObject extends DictionaryObject {
 
 	/**
 	*	@var array $arrKeys The allowed keys.

@@ -1,6 +1,6 @@
 <?php
 /**
-*	File Containing the Object class.
+*	File Containing the EnumObject class.
 *
 *	@package	Frozensheep\Synthesize
 *	@author		Jacob Wyke <jacob@frozensheep.com>
@@ -14,14 +14,14 @@ use Frozensheep\Synthesize\Type\Type;
 use Frozensheep\Synthesize\Exception\ClassException;
 
 /**
-*	Object Class
+*	Enum Object Class
 *
-*	An object data class.
+*	An enum data class.
 *
 *	@package	Frozensheep\Synthesize
 *
 */
-class Enum extends Type {
+class EnumObject extends Type {
 
 	/**
 	*	Setup Method

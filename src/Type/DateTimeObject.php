@@ -1,6 +1,6 @@
 <?php
 /**
-*	File Containing the DateTime class.
+*	File Containing the DateTime Object class.
 *
 *	@package	Frozensheep\Synthesize
 *	@author		Jacob Wyke <jacob@frozensheep.com>
@@ -13,14 +13,14 @@ namespace Frozensheep\Synthesize\Type;
 use Frozensheep\Synthesize\Type\Type;
 
 /**
-*	DateTime Class
+*	DateTime Object Class
 *
 *	A DateTime data class.
 *
 *	@package	Frozensheep\Synthesize
 *
 */
-class DateTime extends Type {
+class DateTimeObject extends Type {
 
 	/**
 	*	Is Valid Method
