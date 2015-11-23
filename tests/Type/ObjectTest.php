@@ -79,9 +79,13 @@ class ObjectTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf('\DateTime', $this->objObject->object6);
 	}
 
-	public function testAutoInit(){
+	public function testInvalidClass(){
 		$this->assertInstanceOf('\DateTime', $this->objObject->object6);
-		$this->assertNull($this->objObject->object7);
+	}
+
+	public function testAutoInit(){
+		$this->setExpectedException('Frozensheep\Synthesize\Exception\ClassException');
+		$this->objObject->object6 = new \stdClass;
 	}
 
 	public function testJSONOutput(){
