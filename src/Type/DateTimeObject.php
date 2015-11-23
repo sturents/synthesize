@@ -11,6 +11,8 @@
 namespace Frozensheep\Synthesize\Type;
 
 use Frozensheep\Synthesize\Type\Type;
+use Frozensheep\Synthesize\Exception\TypeException;
+use Frozensheep\Synthesize\Exception\ClassException;
 
 /**
 *	DateTime Object Class
@@ -23,6 +25,22 @@ use Frozensheep\Synthesize\Type\Type;
 class DateTimeObject extends Type {
 
 	/**
+	*	Setup Method
+	*
+	*	Called after the object is created by the TypeFactory to finish any setup required.
+	*	@return void
+	*/
+	public function setup(){
+		if($this->options()->autoinit){
+			if($this->options()->default){
+				$this->setValue($this->options()->default);
+			}else{
+				$this->setValue('now');
+			}
+		}
+	}
+
+	/**
 	*	Is Valid Method
 	*
 	*	Checks to see if the value is valud for the given data type.
@@ -30,11 +48,28 @@ class DateTimeObject extends Type {
 	*	@return bool
 	*/
 	public function isValid($mixValue){
-		if(is_object($mixDate)){
-			return $mixDate;
-		}else{
-			return new DateTime($mixDate, new DateTimeZone($strTimezone));
+		if(is_null($mixValue)){
+			return true;
 		}
+
+		if(is_object($mixValue)){
+			if($mixValue instanceof \DateTime){
+				return true;
+			}else{
+				throw new ClassException($mixValue, '\DateTime');
+				return false;
+			}
+		}
+
+		if(is_string($mixValue)){
+			try{
+				$objTest = new \DateTime($mixValue);
+				return true;
+			}catch (\Exception $e){
+				throw new TypeException($mixValue, get_class($this));
+			}
+		}
+
 		return false;
 	}
 
@@ -47,13 +82,16 @@ class DateTimeObject extends Type {
 	*	@return bool
 	*/
 	public function setValue($mixValue){
-		if((is_object($mixValue) && $mixValue instanceof \DateTime) || is_null($mixValue)){
-			$this->mixValue = $mixValue;
-			return true;
-		}else if(is_string($mixValue)){
-			$this->mixValue = new \DateTime($mixValue);
-			return true;
+		if($this->isValid($mixValue)){
+			if((is_object($mixValue) && $mixValue instanceof \DateTime) || is_null($mixValue)){
+				$this->mixValue = $mixValue;
+				return true;
+			}else if(is_string($mixValue)){
+				$this->mixValue = new \DateTime($mixValue);
+				return true;
+			}
 		}
+		throw new TypeException($mixValue, get_class($this));
 	}
 
 	/**
@@ -64,8 +102,17 @@ class DateTimeObject extends Type {
 	*/
 	public function jsonSerialize(){
 		if($this->getValue() instanceof \DateTime){
-			return $this->getValue()->format($this->options()->format);
+			if($this->options()->format){
+				return $this->getValue()->format($this->options()->format);
+			}else{
+				if($this->options()->jsonnull){
+					return null;
+				}
+			}
 		}
-		return '';
+
+		if($this->options()->jsonnull){
+			return null;
+		}
 	}
 }
