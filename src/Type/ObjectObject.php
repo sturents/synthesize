@@ -30,8 +30,8 @@ class ObjectObject extends Type {
 	*	@return void
 	*/
 	public function setup(){
-		if($this->options()->autoinit && $this->options()->class){
-			$strClass = $this->options()->class;
+		if($this->options()->autoinit && ($this->options()->class || $this->options()->default)){
+			$strClass = $this->options()->class ? $this->options()->class : $this->options()->default;
 			$this->setValue(new $strClass);
 		}
 	}
