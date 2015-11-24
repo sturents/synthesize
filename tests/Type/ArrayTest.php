@@ -84,9 +84,6 @@ class ArrayTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals(5, $this->objArray->array1()->count());
 	}
 
-	/**
-	*	@requires PHP
-	*/
 	public function testMaxEquals(){
 		$this->objArray->array2 = array(1,2,3);
 		$this->assertEquals(array(1,2,3), $this->objArray->array2);
