@@ -66,12 +66,12 @@ trait Synthesizer {
 					return $this->getSynthesize()->set($strName, $arrArguments[0]);
 				}else{
 					//get request
-					return $this->getSynthesize()->get($strName);
+					return $this->getSynthesize()->asObject($strName);
 				}
-			}else{
-				throw new MissingMethodException($strName, $this);
 			}
         }
+
+        throw new MissingMethodException($strName, $this);
     }
 
 	/**
@@ -84,10 +84,10 @@ trait Synthesizer {
 	*/
     public function __get($strProperty){
 		if($this->getSynthesize()->hasProperty($strProperty)){
-			return $this->getSynthesize()->get($strProperty);
-		}else{
-			throw new SynthesizeException($strProperty, $this);
+			return $this->getSynthesize()->asValue($strProperty);
 		}
+
+		throw new SynthesizeException($strProperty, $this);
     }
 
 	/**
@@ -102,9 +102,9 @@ trait Synthesizer {
     public function __set($strProperty, $mixValue){
 		if($this->getSynthesize()->hasProperty($strProperty)){
 			return $this->getSynthesize()->set($strProperty, $mixValue);
-		}else{
-			throw new SynthesizeException($strProperty, $this);
 		}
+
+		throw new SynthesizeException($strProperty, $this);
     }
 
 	/**
@@ -163,6 +163,7 @@ trait Synthesizer {
 	*
 	*	Attempts to load the synthesize options from the JSON file passed.
 	*	@param string $strFileName The name of the JSON file where the options are.
+	*	@throws MissingOptionsFileException if file cannot be found.
 	*	@return \Frozensheep\Synthesize
 	*/
     private function _loadOptionsFromFile($strFileName){
@@ -172,9 +173,9 @@ trait Synthesizer {
 
     	if(file_exists($strFileName)){
 			return file_get_contents($strFileName);
-    	}else{
-			throw new MissingOptionsFileException($strFileName);
     	}
+
+		throw new MissingOptionsFileException($strFileName);
     }
 
 	/**

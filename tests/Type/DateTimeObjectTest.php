@@ -97,7 +97,7 @@ class DateTimeObjectTest extends \PHPUnit_Framework_TestCase {
 
 		$this->objDateTime->datetime4 = $objObject;
 
-		//object4 is null and object6 is set
+		//datetime2 is null and datetime4 is set with a format for output 'd/m/Y'
 		$strExpecetedJSON = '{"datetime2":null,"datetime4":'.json_encode($objObject->format('d/m/Y')).'}';
 		$strJSON = json_encode($this->objDateTime);
 		$this->assertEquals($strExpecetedJSON, $strJSON);
@@ -124,7 +124,7 @@ class DateTimeObjectTest extends \PHPUnit_Framework_TestCase {
 		$this->objDateTime->datetime4 = null;
 		$this->objDateTime->datetime5 = null;
 
-		//everything is null - only object4 shows null
+		//everything is null - only datetime2 shows null
 		$strExpecetedJSON = '{"datetime2":null}';
 		$strJSON = json_encode($this->objDateTime);
 		$this->assertEquals($strExpecetedJSON, $strJSON);

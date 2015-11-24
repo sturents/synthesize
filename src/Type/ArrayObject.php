@@ -11,6 +11,8 @@
 namespace Frozensheep\Synthesize\Type;
 
 use Frozensheep\Synthesize\Type\Type;
+use Frozensheep\Synthesize\Exception\TypeException;
+use Frozensheep\Synthesize\Exception\MaxException;
 
 /**
 *	Array Object Class
@@ -39,17 +41,73 @@ class ArrayObject extends Type implements \Iterator, \ArrayAccess, \Countable {
 	*	@return void
 	*/
 	public function setup(){
-		$this->mixValue = array();
+		if($this->options()->default){
+			$this->setValue($this->options()->default);
+		}
 	}
 
 	/**
-	*	Get Value Method
+	*	Is Valid Method
 	*
-	*	Return the object rather than the value.
-	*	@return mixed
+	*	Checks to see if the value is valud for the given data type.
+	*	@param mixed $mixValue The value to check.
+	*	@return bool
 	*/
-	public function &getValue(){
-		return $this;
+	public function isValid($mixValue){
+		if(is_null($mixValue)){
+			return true;
+		}
+
+		if(is_array($mixValue)){
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	*	Is Valid Item Method
+	*
+	*	Checks to see if the value is valid to be stored inside the array.
+	*	@param mixed $mixValue The value to check.
+	*	@return bool
+	*/
+	public function isValidItem($mixValue){
+		if($this->options()){
+			if(!is_null($this->options()->max)){
+				if(count($this->mixValue)>=$this->options()->max){
+					throw new MaxException($this->options()->max);
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	*	Set Value Method
+	*
+	*	Sets the value for the property.
+	*	@param mixed $mixValue The value to check.
+	*	@throws TypeException if valud is not valid.
+	*	@return bool
+	*/
+	public function setValue($mixValue){
+		if($this->isValid($mixValue)){
+			$this->mixValue = array();
+
+			if(is_array($mixValue)){
+				//set the array using offsetSet so that checks are carried out on the content of the array
+				foreach($mixValue as $strKey => $mixValue){
+					$this->offsetSet($strKey, $mixValue);
+				}
+			}
+			return true;
+		}
+
+		throw new TypeException($mixValue, get_class($this));
+		return false;
 	}
 
 	/**
@@ -111,7 +169,7 @@ class ArrayObject extends Type implements \Iterator, \ArrayAccess, \Countable {
 	*	@return void
 	*/
 	public function offsetSet($mixOffset, $mixValue){
-		if($this->isValid($mixValue)){
+		if($this->isValidItem($mixValue)){
 			if(is_null($mixOffset)){
 				$this->mixValue[] = $mixValue;
 			}else{

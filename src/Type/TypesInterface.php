@@ -28,12 +28,20 @@ interface TypesInterface {
 	public function setup();
 
 	/**
-	*	Get Value Method
+	*	As Value Method
 	*
-	*	Returns the value for the property.
+	*	Returns the value of the object.
 	*	@return mixed
 	*/
-	public function getValue();
+	public function asValue();
+
+	/**
+	*	As Object Method
+	*
+	*	Returns the object.
+	*	@return object
+	*/
+	public function asObject();
 
 	/**
 	*	Set Value Method

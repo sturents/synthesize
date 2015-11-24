@@ -50,6 +50,7 @@ class TypeFactory {
 	static public function getType($strType){
 		//convert reserved names to the actual objects
 		$arrReservere = array(
+			'array' => 'ArrayObject',
 			'bool' => 'BooleanObject',
 			'boolean' => 'BooleanObject',
 			'datetime' => 'DateTimeObject',

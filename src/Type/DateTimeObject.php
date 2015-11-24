@@ -101,9 +101,9 @@ class DateTimeObject extends Type {
 	*	@return mixed
 	*/
 	public function jsonSerialize(){
-		if($this->getValue() instanceof \DateTime){
+		if($this->asValue() instanceof \DateTime){
 			if($this->options()->format){
-				return $this->getValue()->format($this->options()->format);
+				return $this->asValue()->format($this->options()->format);
 			}else{
 				if($this->options()->jsonnull){
 					return null;

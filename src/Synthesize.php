@@ -111,15 +111,26 @@ class Synthesize implements \Iterator, \JsonSerializable {
 	}
 
 	/**
-	*	Get Method
+	*	As Value Method
 	*
 	*	Returns the value of the property requested.
 	*	@param string $strProperty The name of the value you want to get.
 	*	@return mixed Whatever type the value of the property is.
 	*/
-	public function get($strProperty){
+	public function asValue($strProperty){
+		return $this->asObject($strProperty)->asValue();
+	}
+
+	/**
+	*	As Object Method
+	*
+	*	Returns the full object of the property requested.
+	*	@param string $strProperty The name of the value you want to get.
+	*	@return object
+	*/
+	public function asObject($strProperty){
 		$strProperty = $this->_formatPropertyName($strProperty);
-		return $this->getObject($strProperty)->getValue();
+		return $this->_arrData[$strProperty]->asObject();
 	}
 
 	/**
@@ -132,19 +143,7 @@ class Synthesize implements \Iterator, \JsonSerializable {
 	*/
 	public function set($strProperty, $mixValue){
 		$strProperty = $this->_formatPropertyName($strProperty);
-		$this->getObject($strProperty)->setValue($mixValue);
-	}
-
-	/**
-	*	Get Object Method
-	*
-	*	Returns the full object of the property requested.
-	*	@param string $strProperty The name of the value you want to get.
-	*	@return mixed Whatever type the property is.
-	*/
-	public function getObject($strProperty){
-		$strProperty = $this->_formatPropertyName($strProperty);
-		return $this->_arrData[$strProperty];
+		$this->asObject($strProperty)->setValue($mixValue);
 	}
 
 	/**

@@ -73,13 +73,23 @@ class Type implements TypesInterface, \JsonSerializable {
 	}
 
 	/**
-	*	Get Value Method
+	*	As Value Method
 	*
-	*	Returns the value for the property.
+	*	Returns the value of the object.
 	*	@return mixed
 	*/
-	public function &getValue(){
+	public function asValue(){
 		return $this->mixValue;
+	}
+
+	/**
+	*	As Object Method
+	*
+	*	Returns the object.
+	*	@return object
+	*/
+	public function asObject(){
+		return $this;
 	}
 
 	/**
@@ -114,9 +124,9 @@ class Type implements TypesInterface, \JsonSerializable {
 		if($this->isValid($mixValue) || is_null($mixValue)){
 			$this->mixValue = $mixValue;
 			return true;
-		}else{
-			throw new TypeException($mixValue, get_class($this));
 		}
+
+		throw new TypeException($mixValue, get_class($this));
 	}
 
 	/**
@@ -137,6 +147,6 @@ class Type implements TypesInterface, \JsonSerializable {
 	*	@return mixed
 	*/
 	public function jsonSerialize(){
-		return $this->getValue();
+		return $this->asValue();
 	}
 }
