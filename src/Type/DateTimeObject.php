@@ -31,8 +31,8 @@ class DateTimeObject extends Type {
 	*	@return void
 	*/
 	public function setup(){
-		if($this->options()->autoinit){
-			if($this->options()->default){
+		if($this->hasOption('autoinit') && $this->options()->autoinit){
+			if($this->hasOption('default')){
 				$this->setValue($this->options()->default);
 			}else{
 				$this->setValue('now');
@@ -102,16 +102,16 @@ class DateTimeObject extends Type {
 	*/
 	public function jsonSerialize(){
 		if($this->asValue() instanceof \DateTime){
-			if($this->options()->format){
+			if($this->hasOption('format')){
 				return $this->asValue()->format($this->options()->format);
 			}else{
-				if($this->options()->jsonnull){
+				if($this->hasOption('jsonnull') && $this->options()->jsonnull){
 					return null;
 				}
 			}
 		}
 
-		if($this->options()->jsonnull){
+		if($this->hasOption('jsonnull') && $this->options()->jsonnull){
 			return null;
 		}
 	}

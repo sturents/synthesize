@@ -44,26 +44,22 @@ class ObjectArrayObject extends ArrayObject {
 	*/
 	public function isValidItem($mixValue){
 		if(is_object($mixValue)){
-			if($this->options()){
-				if(!is_null($this->options()->max)){
-					if(count($this->mixValue)>=$this->options()->max){
-						throw new MaxException($this->options()->max);
-						return false;
-					}
-				}
-
-				if(!is_null($this->options()->class)){
-					$strClass = $this->options()->class;
-					if(!$mixValue instanceof $strClass){
-						throw new ClassException($mixValue, $this->options()->class);
-						return false;
-					}
+			if($this->hasOption('max')){
+				if(count($this->mixValue)>=$this->options()->max){
+					throw new MaxException($this->options()->max);
+					return false;
 				}
 			}
 
+			if($this->hasOption('class')){
+				$strClass = $this->options()->class;
+				if(!$mixValue instanceof $strClass){
+					throw new ClassException($mixValue, $this->options()->class);
+					return false;
+				}
+			}
 			return true;
 		}
-
 		return false;
 	}
 
@@ -77,15 +73,13 @@ class ObjectArrayObject extends ArrayObject {
 	*/
 	public function offsetSet($mixOffset, $mixValue){
 		if(!$this->isValidItem($mixValue)){
-			if($this->options()){
-				if(!is_null($this->options()->class)){
-					$strClass = $this->options()->class;
+			if($this->hasOption('class')){
+				$strClass = $this->options()->class;
 
-					try {
-						$mixValue = new $strClass($mixValue);
-					}catch (\Exception $e){
-						throw new TypeException($mixValue, get_class($this));
-					}
+				try {
+					$mixValue = new $strClass($mixValue);
+				}catch (\Exception $e){
+					throw new TypeException($mixValue, get_class($this));
 				}
 			}
 		}

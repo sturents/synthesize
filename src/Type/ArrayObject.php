@@ -41,7 +41,7 @@ class ArrayObject extends Type implements \Iterator, \ArrayAccess, \Countable {
 	*	@return void
 	*/
 	public function setup(){
-		if($this->options()->default){
+		if($this->hasOption('default')){
 			$this->setValue($this->options()->default);
 		}
 	}
@@ -73,12 +73,10 @@ class ArrayObject extends Type implements \Iterator, \ArrayAccess, \Countable {
 	*	@return bool
 	*/
 	public function isValidItem($mixValue){
-		if($this->options()){
-			if(!is_null($this->options()->max)){
-				if(count($this->mixValue)>=$this->options()->max){
-					throw new MaxException($this->options()->max);
-					return false;
-				}
+		if($this->hasOption('max')){
+			if(count($this->mixValue)>=$this->options()->max){
+				throw new MaxException($this->options()->max);
+				return false;
 			}
 		}
 

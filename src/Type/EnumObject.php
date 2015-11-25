@@ -56,8 +56,12 @@ class EnumObject extends Type {
 	*	@return bool
 	*/
 	public function setValue($mixValue){
-		$strClass = $this->options()->class;
-		$this->mixValue = new $strClass($mixValue);
+		if($this->hasOption('class')){
+			$strClass = $this->options()->class;
+			$this->mixValue = new $strClass($mixValue);
+		}else{
+			throw new \Exception;
+		}
 	}
 
 	/**

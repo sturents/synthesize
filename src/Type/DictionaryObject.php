@@ -262,7 +262,7 @@ class DictionaryObject extends Type implements \Iterator, \Countable {
 		$this->updateKeys();
 
 		foreach($this as $strKey => $mixValue){
-			if(!is_null($mixValue) || $this->options()->jsonnull){
+			if(!is_null($mixValue) || ($this->hasOption('jsonnull') && $this->options()->jsonnull)){
 				$arrData[$strKey] = $mixValue;
 			}
 		}

@@ -31,8 +31,8 @@ class ObjectObject extends Type {
 	*	@return void
 	*/
 	public function setup(){
-		if($this->options()->autoinit && ($this->options()->class || $this->options()->default)){
-			$strClass = $this->options()->class ? $this->options()->class : $this->options()->default;
+		if(($this->hasOption('autoinit') && $this->options()->autoinit) && ($this->hasOption('class') || $this->hasOption('default'))){
+			$strClass = $this->hasOption('class') ? $this->options()->class : $this->options()->default;
 			$this->setValue(new $strClass);
 		}
 	}
@@ -47,15 +47,13 @@ class ObjectObject extends Type {
 	*/
 	public function setValue($mixValue){
 		if(!$this->isValid($mixValue)){
-			if($this->options()){
-				if(!is_null($this->options()->class)){
-					$strClass = $this->options()->class;
+			if($this->hasOption('class')){
+				$strClass = $this->options()->class;
 
-					try {
-						$mixValue = new $strClass($mixValue);
-					}catch (\Exception $e){
-						throw new TypeException($mixValue, get_class($this));
-					}
+				try {
+					$mixValue = new $strClass($mixValue);
+				}catch (\Exception $e){
+					throw new TypeException($mixValue, get_class($this));
 				}
 			}
 		}
@@ -76,15 +74,14 @@ class ObjectObject extends Type {
 		}
 
 		if(is_object($mixValue)){
-			if($this->options()){
-				if($this->options()->class){
-					$strClass = $this->options()->class;
-					if($mixValue instanceof $strClass){
-						return true;
-					}else{
-						throw new ClassException($mixValue, $strClass);
-						return false;
-					}
+			if($this->hasOption('class')){
+				$strClass = $this->options()->class;
+
+				if($mixValue instanceof $strClass){
+					return true;
+				}else{
+					throw new ClassException($mixValue, $strClass);
+					return false;
 				}
 			}
 			return true;
