@@ -11,6 +11,7 @@
 namespace Frozensheep\Synthesize\Type;
 
 use Frozensheep\Synthesize\Type\ArrayObject;
+use Frozensheep\Synthesize\Exception\MaxException;
 use Frozensheep\Synthesize\Exception\ClassException;
 
 /**
@@ -24,49 +25,44 @@ use Frozensheep\Synthesize\Exception\ClassException;
 class ObjectArrayObject extends ArrayObject {
 
 	/**
-	*	Offset Set Method
+	*	Setup Method
 	*
-	*	Offset Set method for the \ArrayAccess Interface.
-	*	@param mixed $mixOffset The array offset/key.
-	*	@param mixed $mixValue The value to set.
+	*	Overwrite the ArrayObject method as we dont allow defaults for this type.
 	*	@return void
 	*/
-	public function offsetSet($mixOffset, $mixValue){
-		$strClass = $this->options()->class;
+	public function setup(){
 
-		if(is_object($mixValue)){
-			if($mixValue instanceof $strClass){
-				$this->mixValue[] = $mixValue;
-				return;
-			}
-		}
-
-		//fall back to putting the value into a class
-		$this->mixValue[] = new $strClass($mixValue);
 	}
 
 	/**
-	*	Is Valid Method
+	*	Is Valid Item Method
 	*
-	*	Checks to see if the value is value for the given data type. We only accept arrays.
+	*	Checks to see if the value is valid to be stored inside the array.
 	*	@param mixed $mixValue The value to check.
 	*	@return bool
 	*/
-	public function isValid($mixValue){
+	public function isValidItem($mixValue){
 		if(is_object($mixValue)){
-			if($this->options()->class){
-				$strClass = $this->options()->class;
-				if($mixValue instanceof $strClass){
-					return true;
-				}else{
-					throw new ClassException($mixValue, $strClass);
-					return false;
+			if($this->options()){
+				if(!is_null($this->options()->max)){
+					if(count($this->mixValue)>=$this->options()->max){
+						throw new MaxException($this->options()->max);
+						return false;
+					}
+				}
+
+				if(!is_null($this->options()->class)){
+					$strClass = $this->options()->class;
+					if($mixValue instanceof $strClass){
+						throw new ClassException($mixValue, $this->options()->class);
+						return false;
+					}
 				}
 			}
 
 			return true;
-		}else{
-			return false;
 		}
+
+		return false;
 	}
 }

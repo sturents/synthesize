@@ -2,14 +2,14 @@
 
 namespace Frozensheep\Synthesize\Tests\Type;
 
-use Frozensheep\Synthesize\Tests\Type\Fixtures\DateTimeObjectFixture;
+use Frozensheep\Synthesize\Tests\Type\Fixtures\DateTimeFixture;
 
-class DateTimeObjectTest extends \PHPUnit_Framework_TestCase {
+class DateTimeTest extends \PHPUnit_Framework_TestCase {
 
 	protected $objDateTime;
 
 	protected function setUp(){
-		$this->objDateTime = new DateTimeObjectFixture();
+		$this->objDateTime = new DateTimeFixture();
 	}
 
 	public function testDateTimeOnCreate(){

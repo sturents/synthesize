@@ -4,7 +4,7 @@ namespace Frozensheep\Synthesize\Tests\Type\Fixtures;
 
 use Frozensheep\Synthesize\Synthesizer;
 
-class DateTimeObjectFixture implements \JsonSerializable {
+class DateTimeFixture implements \JsonSerializable {
 
 	//include the Sythesizer trait
 	use Synthesizer;
