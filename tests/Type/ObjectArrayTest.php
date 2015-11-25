@@ -88,6 +88,21 @@ class ObjectArrayTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals(2, $this->objObjectArray->objectarray1()->count());
 	}
 
+	public function testPassingObjectParams(){
+		$this->objObjectArray->objectarray1 = array();
+		$this->objObjectArray->objectarray1()[] = '2015-11-25';
+		$this->assertEquals(array(new \DateTime('2015-11-25')), $this->objObjectArray->objectarray1);
+
+		$this->objObjectArray->objectarray1 = array();
+		$this->objObjectArray->objectarray1()[] = new \DateTime('2015-11-25');
+		$this->assertEquals(array(new \DateTime('2015-11-25')), $this->objObjectArray->objectarray1);
+	}
+	public function testPassingBadObjectParams(){
+		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->objObjectArray->objectarray1 = array();
+		$this->objObjectArray->objectarray1()[] = 'hello';
+	}
+
 	public function testMaxEquals(){
 		$arrData = array(new \DateTime(), new \DateTime(), new \DateTime());
 		$this->objObjectArray->objectarray2 = $arrData;

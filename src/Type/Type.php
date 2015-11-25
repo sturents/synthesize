@@ -67,7 +67,7 @@ class Type implements TypesInterface, \JsonSerializable {
 	*	@return void
 	*/
 	public function setup(){
-		if($this->options()->default){
+		if($this->hasOption('default', true)){
 			$this->setValue($this->options()->default);
 		}
 	}
@@ -108,8 +108,25 @@ class Type implements TypesInterface, \JsonSerializable {
 	*	Returns the SynthesizeOption object for the given property.
 	*	@return Frozensheep\Synthesize\Type\SynthesizeOption
 	*/
-	public function &options(){
+	public function options(){
 		return $this->_objOptions;
+	}
+
+	/**
+	*	Has Option Method
+	*
+	*	Checks to see if the given option is set and available.
+	*	@param $strOption The option.
+	*	@return boolean
+	*/
+	public function hasOption($strOption, $boolAllowNull = false){
+		if($this->options()){
+			if($boolAllowNull || !is_null($this->options()->{$strOption})){
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**

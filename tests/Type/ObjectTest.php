@@ -79,6 +79,16 @@ class ObjectTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf('\DateTime', $this->objObject->object6);
 	}
 
+	public function testPassingObjectParams(){
+		$this->objObject->object6 = '2015-11-25';
+		$this->assertEquals(new \DateTime('2015-11-25'), $this->objObject->object6);
+	}
+
+	public function testPassingBadObjectParams(){
+		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->objObject->object6 = 'hello';
+	}
+
 	public function testInvalidClass(){
 		$this->assertInstanceOf('\DateTime', $this->objObject->object6);
 	}

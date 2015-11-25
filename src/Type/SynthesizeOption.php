@@ -43,7 +43,7 @@ class SynthesizeOption extends FixedDictionaryObject {
 	*/
 	protected $arrDefaults = array(
 		'type' => 'id',
-		'default' => '',
+		'default' => null,
 		'min' => null,
 		'max' => null,
 		'format' => null,

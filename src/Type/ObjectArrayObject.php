@@ -64,7 +64,32 @@ class ObjectArrayObject extends ArrayObject {
 			return true;
 		}
 
-		throw new TypeException($mixValue, get_class($this));
 		return false;
+	}
+
+	/**
+	*	Offset Set Method
+	*
+	*	Offset Set method for the \ArrayAccess Interface.
+	*	@param mixed $mixOffset The array offset/key.
+	*	@param mixed $mixValue The value to set.
+	*	@return void
+	*/
+	public function offsetSet($mixOffset, $mixValue){
+		if(!$this->isValidItem($mixValue)){
+			if($this->options()){
+				if(!is_null($this->options()->class)){
+					$strClass = $this->options()->class;
+
+					try {
+						$mixValue = new $strClass($mixValue);
+					}catch (\Exception $e){
+						throw new TypeException($mixValue, get_class($this));
+					}
+				}
+			}
+		}
+
+		parent::offsetSet($mixOffset, $mixValue);
 	}
 }
