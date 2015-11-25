@@ -53,7 +53,7 @@ class ObjectArrayObject extends ArrayObject {
 
 				if(!is_null($this->options()->class)){
 					$strClass = $this->options()->class;
-					if($mixValue instanceof $strClass){
+					if(!$mixValue instanceof $strClass){
 						throw new ClassException($mixValue, $this->options()->class);
 						return false;
 					}
