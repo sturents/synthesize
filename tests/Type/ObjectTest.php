@@ -79,8 +79,16 @@ class ObjectTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf('\DateTime', $this->objObject->object6);
 	}
 
+	public function testBadClass(){
+		$this->setExpectedException('Frozensheep\Synthesize\Exception\ClassException');
+		$this->objObject->object6 = new \stdClass;
+	}
+
 	public function testPassingObjectParams(){
 		$this->objObject->object6 = '2015-11-25';
+		$this->assertEquals(new \DateTime('2015-11-25'), $this->objObject->object6);
+
+		$this->objObject->object6 = new \DateTime('2015-11-25');
 		$this->assertEquals(new \DateTime('2015-11-25'), $this->objObject->object6);
 	}
 
@@ -94,8 +102,13 @@ class ObjectTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testAutoInit(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\ClassException');
-		$this->objObject->object6 = new \stdClass;
+		$this->assertNull($this->objObject->object7);
+
+		$this->objObject->object7 = new \DateTime('2015-11-25');
+		$this->assertEquals(new \DateTime('2015-11-25'), $this->objObject->object7);
+
+		$this->objObject->object7 = null;
+		$this->assertNull($this->objObject->object7);
 	}
 
 	public function testJSONOutput(){
