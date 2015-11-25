@@ -13,6 +13,7 @@ namespace Frozensheep\Synthesize\Type;
 use Frozensheep\Synthesize\Type\ArrayObject;
 use Frozensheep\Synthesize\Exception\MaxException;
 use Frozensheep\Synthesize\Exception\ClassException;
+use Frozensheep\Synthesize\Exception\TypeException;
 
 /**
 *	Object Array Object Class
