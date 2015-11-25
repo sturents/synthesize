@@ -63,6 +63,7 @@ class ObjectArrayObject extends ArrayObject {
 			return true;
 		}
 
+		throw new TypeException($mixValue, get_class($this));
 		return false;
 	}
 }
