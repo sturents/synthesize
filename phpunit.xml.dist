@@ -19,8 +19,8 @@
 
 	<logging>
 		<log type="coverage-text" target="php://stdout" showUncoveredFiles="true"/>
-		<log type="coverage-html" target="_build/logs/html"/>
-		<log type="coverage-clover" target="_build/logs/clover.xml"/>
-		<log type="junit" target="_build/logs/junit.xml" logIncompleteSkipped="false"/>
+		<log type="coverage-html" target="build/logs/html"/>
+		<log type="coverage-clover" target="build/logs/clover.xml"/>
+		<log type="junit" target="build/logs/junit.xml" logIncompleteSkipped="false"/>
 	</logging>
 </phpunit>
