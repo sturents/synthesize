@@ -3,13 +3,13 @@
 	<target name="build" depends="prepare,lint,phpdoc,phpunit"/>
 
 	<target name="clean" description="Cleanup build">
-		<delete dir="${project.basedir}/_build" />
+		<delete dir="${project.basedir}/build" />
 	</target>
 
 	<target name="prepare" depends="clean" description="Prepare for build">
 		<mkdir dir="${project.basedir}/docs" />
-		<mkdir dir="${project.basedir}/_build/logs/lint" />
-		<mkdir dir="${project.basedir}/_build/logs/phpunit" />
+		<mkdir dir="${project.basedir}/build/logs/lint" />
+		<mkdir dir="${project.basedir}/build/logs/phpunit" />
 	</target>
 
 	<target name="insertTags.loop" description="loops through all the files">
@@ -38,7 +38,7 @@
 	</target>
 
 	<target name="lint">
-		<phplint tofile="${project.basedir}/_build/logs/lint/errors.txt" haltonfailure="true">
+		<phplint tofile="${project.basedir}/build/logs/lint/errors.txt" haltonfailure="true">
 			<fileset dir="${project.basedir}/src">
 				<include name="**/*.php" />
 			</fileset>
@@ -55,7 +55,7 @@
 
 	<target name="phpunit">
 		<phpunit bootstrap="${project.basedir}/vendor/autoload.php" haltonfailure="true" haltonerror="true" printsummary="true" pharlocation="/usr/local/bin/phpunit">
-			<formatter type="xml" todir="${project.basedir}/_build/logs/phpunit"/>
+			<formatter type="xml" todir="${project.basedir}/build/logs/phpunit"/>
 			<batchtest>
 				<fileset dir="${project.basedir}">
 					<include name="**/*Test.php"/>
