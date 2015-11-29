@@ -8,4 +8,8 @@ class JSONFixture implements \JsonSerializable {
 
 	//include the Sythesizer trait
 	use Synthesizer;
+
+	public function test(){
+		return true;
+	}
 }

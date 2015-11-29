@@ -83,6 +83,15 @@ class SynthesizerTest extends \PHPUnit_Framework_TestCase {
 		$this->objSynthesize->_loadOptionsFromFile('doesnt_exist.json');
 	}
 
+	public function testMethodCall(){
+		$this->assertTrue($this->objJSONSynthesize->test());
+	}
+
+	public function testBadMethodCall(){
+		$this->setExpectedException('Frozensheep\Synthesize\Exception\MissingMethodException');
+		$this->objSynthesize->doesntExist();
+	}
+
 	public function testJSON(){
 		$this->assertEquals(json_encode($this->objSynthesize), json_encode($this->objSynthesize->jsonSerialize()));
 		$this->assertEquals(array('id1'=>'hello','id2'=>15,'id3'=>array(1,2,3),'id4'=>null), $this->objSynthesize->jsonSerialize());
