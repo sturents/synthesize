@@ -4,6 +4,7 @@ namespace Frozensheep\Synthesize\Tests\Type;
 
 use Frozensheep\Synthesize\Type\SynthesizeOption;
 use Frozensheep\Synthesize\Type\TypeFactory;
+use Frozensheep\Synthesize\Tests\Type\Fixtures\MonthsFixture;
 
 class TypeFactoryTest extends \PHPUnit_Framework_TestCase {
 
@@ -26,7 +27,7 @@ class TypeFactoryTest extends \PHPUnit_Framework_TestCase {
 				'Frozensheep\Synthesize\Type\DictionaryObject'
 			),
 			"enum" => array(
-				array('type' => 'enum'),
+				array('type' => 'enum', 'class' => 'Frozensheep\Synthesize\Tests\Type\Fixtures\MonthsFixture'),
 				'Frozensheep\Synthesize\Type\EnumObject'
 			),
 			"float" => array(

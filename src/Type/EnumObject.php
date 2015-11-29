@@ -11,7 +11,7 @@
 namespace Frozensheep\Synthesize\Type;
 
 use Frozensheep\Synthesize\Type\Type;
-use Frozensheep\Synthesize\Exception\ClassException;
+use Frozensheep\Synthesize\Exception\MissingOptionException;
 
 /**
 *	Enum Object Class
@@ -30,8 +30,12 @@ class EnumObject extends Type {
 	*	@return void
 	*/
 	public function setup(){
-		if(($this->hasOption('autoinit') && $this->options()->autoinit) && $this->hasOption('class') && $this->hasOption('default')){
-			$this->setValue($this->options()->default);
+		if($this->hasOption('class') && $this->options()->class){
+			if(($this->hasOption('autoinit') && $this->options()->autoinit) && $this->hasOption('default')){
+				$this->setValue($this->options()->default);
+			}
+		}else{
+			throw new MissingOptionException('class');
 		}
 	}
 
@@ -63,12 +67,8 @@ class EnumObject extends Type {
 			return true;
 		}
 
-		if($this->hasOption('class')){
-			$strClass = $this->options()->class;
-			$this->mixValue = new $strClass($mixValue);
-		}else{
-			throw new \Exception;
-		}
+		$strClass = $this->options()->class;
+		$this->mixValue = new $strClass($mixValue);
 	}
 
 	/**

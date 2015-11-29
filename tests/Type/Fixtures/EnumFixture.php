@@ -17,6 +17,6 @@ class EnumFixture implements \JsonSerializable {
 		'enum3' => array('type' => 'enum', 'class' => 'Frozensheep\Synthesize\Tests\Type\Fixtures\MonthsFixture', 'default' => null),
 		'enum4' => array('type' => 'enum', 'class' => 'Frozensheep\Synthesize\Tests\Type\Fixtures\MonthsFixture', 'jsonnull' => true),
 		'enum5' => array('type' => 'enum', 'class' => 'Frozensheep\Synthesize\Tests\Type\Fixtures\MonthsFixture', 'json' => false),
-		'enum6' => array('type' => 'enum', 'class' => 'Frozensheep\Synthesize\Tests\Type\Fixtures\MonthsFixture', 'autoinit' => false),
+		'enum6' => array('type' => 'enum', 'class' => 'Frozensheep\Synthesize\Tests\Type\Fixtures\MonthsFixture', 'autoinit' => false)
 	);
 }

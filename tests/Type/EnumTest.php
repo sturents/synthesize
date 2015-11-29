@@ -3,14 +3,17 @@
 namespace Frozensheep\Synthesize\Tests\Type;
 
 use Frozensheep\Synthesize\Tests\Type\Fixtures\EnumFixture;
+use Frozensheep\Synthesize\Tests\Type\Fixtures\BadEnumFixture;
 use Frozensheep\Synthesize\Tests\Type\Fixtures\MonthsFixture;
 
 class EnumTest extends \PHPUnit_Framework_TestCase {
 
 	protected $objEnum;
+	protected $objBadEnum;
 
 	protected function setUp(){
 		$this->objEnum = new EnumFixture();
+		$this->objBadEnum = new BadEnumFixture();
 	}
 
 	public function testNullOnCreate(){
@@ -45,6 +48,11 @@ class EnumTest extends \PHPUnit_Framework_TestCase {
 	public function testDefault(){
 		$this->assertEquals(5, $this->objEnum->enum2);
 		$this->assertNull($this->objEnum->enum3);
+	}
+
+	public function testMissingClassOption(){
+		$this->setExpectedException('Frozensheep\Synthesize\Exception\MissingOptionException');
+		$this->objBadEnum->enum = 1;
 	}
 
 	public function testAutoInit(){
