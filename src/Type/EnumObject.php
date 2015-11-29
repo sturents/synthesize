@@ -30,21 +30,23 @@ class EnumObject extends Type {
 	*	@return void
 	*/
 	public function setup(){
-
+		if(($this->hasOption('autoinit') && $this->options()->autoinit) && $this->hasOption('class') && $this->hasOption('default')){
+			$this->setValue($this->options()->default);
+		}
 	}
 
 	/**
-	*	Get Value Method
+	*	As Value Method
 	*
-	*	Returns the value for the property.
+	*	Returns the value of the object.
 	*	@return mixed
 	*/
-	public function getValue(){
-		if(is_object($this->mixValue)){
-			return $this->mixValue;
+	public function asValue(){
+		if(is_null($this->mixValue)){
+			return null;
 		}
 
-		return null;
+		return $this->mixValue->getValue();
 	}
 
 	/**
@@ -56,6 +58,11 @@ class EnumObject extends Type {
 	*	@return bool
 	*/
 	public function setValue($mixValue){
+		if(is_null($mixValue)){
+			$this->mixValue = null;
+			return true;
+		}
+
 		if($this->hasOption('class')){
 			$strClass = $this->options()->class;
 			$this->mixValue = new $strClass($mixValue);
@@ -71,6 +78,6 @@ class EnumObject extends Type {
 	*	@return mixed
 	*/
 	public function jsonSerialize(){
-		return $this->getValue();
+		return $this->asValue();
 	}
 }

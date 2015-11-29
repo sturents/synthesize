@@ -1,8 +1,10 @@
 <?php
 
+namespace Frozensheep\Synthesize\Tests\Type\Fixtures;
+
 use MyCLabs\Enum\Enum;
 
-class Months extends Enum implements \JsonSerializable {
+class MonthsFixture extends Enum implements \JsonSerializable {
 
 	const January = 1;
 	const February = 2;
