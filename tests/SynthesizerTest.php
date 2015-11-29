@@ -27,6 +27,11 @@ class SynthesizerTest extends \PHPUnit_Framework_TestCase {
 		$this->assertNotNull($this->objSynthesize->Id);
 	}
 
+	public function testBadPropertyGet(){
+		$this->setExpectedException('Frozensheep\Synthesize\Exception\SynthesizeException');
+		$this->objSynthesize->BadId;
+	}
+
 	public function testPropertySet(){
 		$this->objSynthesize->Id = 'hello';
 		$this->assertEquals('hello', $this->objSynthesize->Id);
@@ -40,6 +45,20 @@ class SynthesizerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testMethodGet(){
 		$this->assertInstanceOf('Frozensheep\Synthesize\Type\IdObject', $this->objSynthesize->Id());
+	}
+
+	public function testBadMethodGet(){
+		$this->setExpectedException('Frozensheep\Synthesize\Exception\MissingMethodException');
+		$this->objSynthesize->BadId();
+	}
+
+	public function testMethodCall(){
+		$this->assertTrue($this->objJSONSynthesize->test());
+	}
+
+	public function testBadMethodCall(){
+		$this->setExpectedException('Frozensheep\Synthesize\Exception\MissingMethodException');
+		$this->objSynthesize->doesntExist();
 	}
 
 	public function testMethodSet(){
@@ -81,15 +100,6 @@ class SynthesizerTest extends \PHPUnit_Framework_TestCase {
 	public function testJSONLoadFailure(){
 		$this->setExpectedException('Frozensheep\Synthesize\Exception\MissingOptionsFileException');
 		$this->objSynthesize->_loadOptionsFromFile('doesnt_exist.json');
-	}
-
-	public function testMethodCall(){
-		$this->assertTrue($this->objJSONSynthesize->test());
-	}
-
-	public function testBadMethodCall(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\MissingMethodException');
-		$this->objSynthesize->doesntExist();
 	}
 
 	public function testJSON(){
