@@ -83,7 +83,9 @@ trait Synthesizer {
 	*	@return mixed
 	*/
     public function __get($strProperty){
-		if($this->getSynthesize()->hasProperty($strProperty)){
+		if(property_exists($this, $strProperty)){
+			return $this->{$strProperty};
+		}else if($this->getSynthesize()->hasProperty($strProperty)){
 			return $this->getSynthesize()->asValue($strProperty);
 		}
 

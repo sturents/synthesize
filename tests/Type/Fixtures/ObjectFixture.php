@@ -3,6 +3,7 @@
 namespace Frozensheep\Synthesize\Tests\Type\Fixtures;
 
 use Frozensheep\Synthesize\Synthesizer;
+use Frozensheep\Synthesize\Tests\Type\Fixtures\EmptyObjectFixture;
 
 class ObjectFixture implements \JsonSerializable {
 
@@ -19,5 +20,6 @@ class ObjectFixture implements \JsonSerializable {
 		'object5' => array('type' => 'object', 'class' => '\DateTime', 'json' => false),
 		'object6' => array('type' => 'object', 'class' => '\DateTime'),
 		'object7' => array('type' => 'object', 'class' => '\DateTime', 'autoinit' => false),
+		'object8' => array('type' => 'object', 'class' => 'Frozensheep\Synthesize\Tests\Type\Fixtures\EmptyObjectFixture')
 	);
 }

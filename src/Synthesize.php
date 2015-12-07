@@ -275,8 +275,10 @@ class Synthesize implements \Iterator, \JsonSerializable {
 
 		foreach($this as $strKey => $objValue){
 			if($this->options($strKey)->json){
-				if(!is_null($objValue->jsonSerialize()) || $this->options($strKey)->jsonnull){
-					$arrData[$strKey] = $objValue->jsonSerialize();
+				$mixValue = $objValue->jsonSerialize();
+				$mixJSON = json_encode($mixValue);
+				if((!is_null($mixValue) && $mixJSON!='[]') || $this->options($strKey)->jsonnull){
+					$arrData[$strKey] = $mixValue;
 				}
 			}
 		}
