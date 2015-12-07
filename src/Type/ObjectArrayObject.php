@@ -14,6 +14,7 @@ use Frozensheep\Synthesize\Type\ArrayObject;
 use Frozensheep\Synthesize\Exception\MaxException;
 use Frozensheep\Synthesize\Exception\ClassException;
 use Frozensheep\Synthesize\Exception\TypeException;
+use Frozensheep\Synthesize\Exception\MissingOptionException;
 
 /**
 *	Object Array Object Class
@@ -73,17 +74,45 @@ class ObjectArrayObject extends ArrayObject {
 	*/
 	public function offsetSet($mixOffset, $mixValue){
 		if(!$this->isValidItem($mixValue)){
-			if($this->hasOption('class')){
-				$strClass = $this->options()->class;
-
-				try {
-					$mixValue = new $strClass($mixValue);
-				}catch (\Exception $e){
-					throw new TypeException($mixValue, get_class($this));
-				}
-			}
+			$mixValue = $this->_create($mixValue);
 		}
 
 		parent::offsetSet($mixOffset, $mixValue);
+	}
+
+	/**
+	*	_Create Method
+	*
+	*	Creates and returns an object.
+	*	@param mixed $mixValue Optional value to pass to the contruction of the object.
+	*	@return void
+	*/
+	private function _create($mixValue = null){
+		if($this->hasOption('class')){
+			$strClass = $this->options()->class;
+
+			try {
+				$objObject = new $strClass($mixValue);
+			}catch (\Exception $e){
+				throw new TypeException($mixValue, get_class($this));
+			}
+
+			return $objObject;
+		}
+
+		throw new MissingOptionException('class');
+	}
+
+	/**
+	*	Create Method
+	*
+	*	Creates and returns an object.
+	*	@param mixed $mixValue Optional value to pass to the contruction of the object.
+	*	@return void
+	*/
+	public function create($mixValue = null){
+		$objClass = $this->_create($mixValue);
+		$this->offsetSet(null, $objClass);
+		return $objClass;
 	}
 }

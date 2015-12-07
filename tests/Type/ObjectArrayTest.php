@@ -88,6 +88,22 @@ class ObjectArrayTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals(2, $this->objObjectArray->objectarray1()->count());
 	}
 
+	public function testCreate(){
+		$this->assertEquals(0, $this->objObjectArray->objectarray1()->count());
+
+		$objDateTime = $this->objObjectArray->objectarray1()->create();
+		$this->assertEquals(1, $this->objObjectArray->objectarray1()->count());
+
+		$objDateTime2 = $this->objObjectArray->objectarray1()->create();
+		$this->assertEquals(2, $this->objObjectArray->objectarray1()->count());
+
+		$objDateTime3 = $this->objObjectArray->objectarray1()->create();
+		$this->assertEquals(3, $this->objObjectArray->objectarray1()->count());
+
+		$objDateTime4 = $this->objObjectArray->objectarray1()->create();
+		$this->assertEquals(4, $this->objObjectArray->objectarray1()->count());
+	}
+
 	public function testPassingObjectParams(){
 		$this->objObjectArray->objectarray1 = array();
 		$this->objObjectArray->objectarray1()[] = '2015-11-25';
