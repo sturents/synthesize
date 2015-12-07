@@ -96,6 +96,13 @@ class ObjectObject extends Type {
 	*	@return mixed
 	*/
 	public function jsonSerialize(){
-		return is_object($this->mixValue) ? $this->mixValue : null;
+		if(is_object($this->mixValue)){
+			$mixJSON = json_encode($this->mixValue);
+			if((!is_null($this->mixValue) && $mixJSON!='[]') || ($this->hasOption('jsonnull') && $this->options()->jsonnull)){
+				return $this->mixValue;
+			}
+		}
+
+		return null;
 	}
 }
