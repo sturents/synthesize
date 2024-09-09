@@ -207,6 +207,7 @@ class DictionaryObject extends Type implements \Iterator, \Countable {
 	*	Rewind method for the Iterator Interface.
 	*	@return void
 	*/
+	#[\ReturnTypeWillChange]
 	function rewind(){
 		$this->_numPosition = 0;
 	}
@@ -217,6 +218,7 @@ class DictionaryObject extends Type implements \Iterator, \Countable {
 	*	Current method for the Iterator Interface.
 	*	@return mixed
 	*/
+	#[\ReturnTypeWillChange]
 	function current(){
 		return $this->get($this->_arrKeys[$this->_numPosition]);
 	}
@@ -227,6 +229,7 @@ class DictionaryObject extends Type implements \Iterator, \Countable {
 	*	Key method for the Iterator Interface.
 	*	@return
 	*/
+	#[\ReturnTypeWillChange]
 	function key(){
 		return $this->_arrKeys[$this->_numPosition];
 	}
@@ -237,6 +240,7 @@ class DictionaryObject extends Type implements \Iterator, \Countable {
 	*	Next method for the Iterator Interface.
 	*	@return void
 	*/
+	#[\ReturnTypeWillChange]
 	function next(){
 		++$this->_numPosition;
 	}
@@ -247,6 +251,7 @@ class DictionaryObject extends Type implements \Iterator, \Countable {
 	*	Valid method for the Iterator Interface.
 	*	@return boolean
 	*/
+	#[\ReturnTypeWillChange]
 	function valid(){
 		return isset($this->_arrKeys[$this->_numPosition]);
 	}
@@ -257,6 +262,7 @@ class DictionaryObject extends Type implements \Iterator, \Countable {
 	*	Method for the \JsonSerializable Interface.
 	*	@return mixed
 	*/
+	#[\ReturnTypeWillChange]
 	public function jsonSerialize(){
 		$arrData = array();
 		$this->updateKeys();
@@ -275,6 +281,7 @@ class DictionaryObject extends Type implements \Iterator, \Countable {
 	*	Count method for the \Countable Interface.
 	*	@return int
 	*/
+	#[\ReturnTypeWillChange]
 	public function count(){
 		return count($this->mixValue);
 	}

@@ -163,6 +163,7 @@ class Type implements TypesInterface, \JsonSerializable {
 	*	Method for the \JsonSerializable Interface.
 	*	@return mixed
 	*/
+	#[\ReturnTypeWillChange]
 	public function jsonSerialize(){
 		return $this->asValue();
 	}

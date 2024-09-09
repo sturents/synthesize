@@ -186,6 +186,7 @@ trait Synthesizer {
 	*	Called by json_* methods so we can control what items are returned.
 	*	@return mixed
 	*/
+	#[\ReturnTypeWillChange]
 	public function jsonSerialize(){
 		return $this->getSynthesize()->jsonSerialize();
 	}

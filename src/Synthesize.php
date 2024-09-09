@@ -220,6 +220,7 @@ class Synthesize implements \Iterator, \JsonSerializable {
 	*	Rewind method for the Iterator Interface.
 	*	@return void
 	*/
+	#[\ReturnTypeWillChange]
 	function rewind(){
 		$this->_numPosition = 0;
 	}
@@ -230,6 +231,7 @@ class Synthesize implements \Iterator, \JsonSerializable {
 	*	Current method for the Iterator Interface.
 	*	@return mixed
 	*/
+	#[\ReturnTypeWillChange]
 	function current(){
 		return $this->_arrData[$this->_arrProperties[$this->_numPosition]];
 	}
@@ -240,6 +242,7 @@ class Synthesize implements \Iterator, \JsonSerializable {
 	*	Key method for the Iterator Interface.
 	*	@return
 	*/
+	#[\ReturnTypeWillChange]
 	function key(){
 		return $this->_arrProperties[$this->_numPosition];
 	}
@@ -250,6 +253,7 @@ class Synthesize implements \Iterator, \JsonSerializable {
 	*	Next method for the Iterator Interface.
 	*	@return void
 	*/
+	#[\ReturnTypeWillChange]
 	function next(){
 		++$this->_numPosition;
 	}
@@ -260,6 +264,7 @@ class Synthesize implements \Iterator, \JsonSerializable {
 	*	Valid method for the Iterator Interface.
 	*	@return boolean
 	*/
+	#[\ReturnTypeWillChange]
 	function valid(){
 		return isset($this->_arrProperties[$this->_numPosition]);
 	}
@@ -270,6 +275,7 @@ class Synthesize implements \Iterator, \JsonSerializable {
 	*	Called by json_* methods so we can control what items are returned.
 	*	@return mixed
 	*/
+	#[\ReturnTypeWillChange]
 	public function jsonSerialize(){
 		$arrData = array();
 

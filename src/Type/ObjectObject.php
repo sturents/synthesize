@@ -95,6 +95,7 @@ class ObjectObject extends Type {
 	*	Method for the \JsonSerializable Interface.
 	*	@return mixed
 	*/
+	#[\ReturnTypeWillChange]
 	public function jsonSerialize(){
 		if(is_object($this->mixValue)){
 			$mixJSON = json_encode($this->mixValue);

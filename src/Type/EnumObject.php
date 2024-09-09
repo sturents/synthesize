@@ -77,6 +77,7 @@ class EnumObject extends Type {
 	*	Method for the \JsonSerializable Interface.
 	*	@return mixed
 	*/
+	#[\ReturnTypeWillChange]
 	public function jsonSerialize(){
 		return $this->asValue();
 	}

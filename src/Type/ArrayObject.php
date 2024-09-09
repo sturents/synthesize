@@ -114,6 +114,7 @@ class ArrayObject extends Type implements \Iterator, \ArrayAccess, \Countable {
 	*	Rewind method for the Iterator Interface.
 	*	@return void
 	*/
+	#[\ReturnTypeWillChange]
 	function rewind(){
 		$this->_numPosition = 0;
 	}
@@ -124,6 +125,7 @@ class ArrayObject extends Type implements \Iterator, \ArrayAccess, \Countable {
 	*	Current method for the Iterator Interface.
 	*	@return mixed
 	*/
+	#[\ReturnTypeWillChange]
 	function current(){
 		return $this->mixValue[$this->_numPosition];
 	}
@@ -134,6 +136,7 @@ class ArrayObject extends Type implements \Iterator, \ArrayAccess, \Countable {
 	*	Key method for the Iterator Interface.
 	*	@return
 	*/
+	#[\ReturnTypeWillChange]
 	function key(){
 		return $this->_numPosition;
 	}
@@ -144,6 +147,7 @@ class ArrayObject extends Type implements \Iterator, \ArrayAccess, \Countable {
 	*	Next method for the Iterator Interface.
 	*	@return void
 	*/
+	#[\ReturnTypeWillChange]
 	function next(){
 		++$this->_numPosition;
 	}
@@ -154,6 +158,7 @@ class ArrayObject extends Type implements \Iterator, \ArrayAccess, \Countable {
 	*	Valid method for the Iterator Interface.
 	*	@return boolean
 	*/
+	#[\ReturnTypeWillChange]
 	function valid(){
 		return isset($this->mixValue[$this->_numPosition]);
 	}
@@ -166,6 +171,7 @@ class ArrayObject extends Type implements \Iterator, \ArrayAccess, \Countable {
 	*	@param mixed $mixValue The value to set.
 	*	@return void
 	*/
+	#[\ReturnTypeWillChange]
 	public function offsetSet($mixOffset, $mixValue){
 		if($this->isValidItem($mixValue)){
 			if(is_null($mixOffset)){
@@ -183,6 +189,7 @@ class ArrayObject extends Type implements \Iterator, \ArrayAccess, \Countable {
 	*	@param mixed $mixOffset The array offset/key.
 	*	@return boolean
 	*/
+	#[\ReturnTypeWillChange]
 	public function offsetExists($mixOffset){
 		return isset($this->mixValue[$mixOffset]);
 	}
@@ -194,6 +201,7 @@ class ArrayObject extends Type implements \Iterator, \ArrayAccess, \Countable {
 	*	@param mixed $mixOffset The array offset/key.
 	*	@return void
 	*/
+	#[\ReturnTypeWillChange]
 	public function offsetUnset($mixOffset){
 		unset($this->mixValue[$mixOffset]);
 	}
@@ -205,6 +213,7 @@ class ArrayObject extends Type implements \Iterator, \ArrayAccess, \Countable {
 	*	@param mixed $mixOffset The array offset/key.
 	*	@return boolean
 	*/
+	#[\ReturnTypeWillChange]
 	public function offsetGet($mixOffset){
 		return isset($this->mixValue[$mixOffset]) ? $this->mixValue[$mixOffset] : null;
 	}
@@ -215,6 +224,7 @@ class ArrayObject extends Type implements \Iterator, \ArrayAccess, \Countable {
 	*	Method for the \JsonSerializable Interface.
 	*	@return mixed
 	*/
+	#[\ReturnTypeWillChange]
 	public function jsonSerialize(){
 		return count($this->mixValue) ? $this->mixValue : null;
 	}
@@ -225,6 +235,7 @@ class ArrayObject extends Type implements \Iterator, \ArrayAccess, \Countable {
 	*	Count method for the \Countable Interface.
 	*	@return int
 	*/
+	#[\ReturnTypeWillChange]
 	public function count(){
 		return count($this->mixValue);
 	}
