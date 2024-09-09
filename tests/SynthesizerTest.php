@@ -4,13 +4,14 @@ namespace Frozensheep\Synthesize\Tests;
 
 use Frozensheep\Synthesize\Tests\Type\Fixtures\IdFixture;
 use Frozensheep\Synthesize\Tests\Type\Fixtures\JSONFixture;
+use PHPUnit\Framework\TestCase;
 
-class SynthesizerTest extends \PHPUnit_Framework_TestCase {
+class SynthesizerTest extends TestCase {
 
 	protected $objSynthesize;
 	protected $objJSONSynthesize;
 
-	protected function setUp(){
+	protected function setUp(): void{
 		$this->objSynthesize = new IdFixture();
 		$this->objJSONSynthesize = new JSONFixture();
 	}
@@ -28,7 +29,7 @@ class SynthesizerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testBadPropertyGet(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\SynthesizeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\SynthesizeException');
 		$this->objSynthesize->BadId;
 	}
 
@@ -48,7 +49,7 @@ class SynthesizerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testBadMethodGet(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\MissingMethodException');
+		$this->expectException('Frozensheep\Synthesize\Exception\MissingMethodException');
 		$this->objSynthesize->BadId();
 	}
 
@@ -57,7 +58,7 @@ class SynthesizerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testBadMethodCall(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\MissingMethodException');
+		$this->expectException('Frozensheep\Synthesize\Exception\MissingMethodException');
 		$this->objSynthesize->doesntExist();
 	}
 
@@ -98,7 +99,7 @@ class SynthesizerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testJSONLoadFailure(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\MissingOptionsFileException');
+		$this->expectException('Frozensheep\Synthesize\Exception\MissingOptionsFileException');
 		$this->objSynthesize->_loadOptionsFromFile('doesnt_exist.json');
 	}
 

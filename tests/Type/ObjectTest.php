@@ -3,12 +3,13 @@
 namespace Frozensheep\Synthesize\Tests\Type;
 
 use Frozensheep\Synthesize\Tests\Type\Fixtures\ObjectFixture;
+use PHPUnit\Framework\TestCase;
 
-class ObjectTest extends \PHPUnit_Framework_TestCase {
+class ObjectTest extends TestCase {
 
 	protected $objObject;
 
-	protected function setUp(){
+	protected function setUp(): void{
 		$this->objObject = new ObjectFixture();
 	}
 
@@ -17,17 +18,17 @@ class ObjectTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testPossitiveInt(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objObject->object1 = 4;
 	}
 
 	public function testNagativeInt(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objObject->object1 = -4;
 	}
 
 	public function testZero(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objObject->object1 = 0;
 	}
 
@@ -37,27 +38,27 @@ class ObjectTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testFloat(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objObject->object1 = 4.5;
 	}
 
 	public function testNegtiveFloat(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objObject->object1 = -4.5;
 	}
 
 	public function testString(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objObject->object1 = 'hello';
 	}
 
 	public function testStringInt(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objObject->object1 = '4';
 	}
 
 	public function testArray(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objObject->object1 = array();
 	}
 
@@ -80,7 +81,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testBadClass(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\ClassException');
+		$this->expectException('Frozensheep\Synthesize\Exception\ClassException');
 		$this->objObject->object6 = new \stdClass;
 	}
 
@@ -93,7 +94,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testPassingBadObjectParams(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objObject->object6 = 'hello';
 	}
 

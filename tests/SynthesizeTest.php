@@ -3,12 +3,13 @@
 namespace Frozensheep\Synthesize\Tests;
 
 use Frozensheep\Synthesize\Tests\Type\Fixtures\IdFixture;
+use PHPUnit\Framework\TestCase;
 
-class SynthesizeTest extends \PHPUnit_Framework_TestCase {
+class SynthesizeTest extends TestCase {
 
 	protected $objSynthesize;
 
-	protected function setUp(){
+	protected function setUp(): void{
 		$this->objSynthesize = new IdFixture();
 	}
 

@@ -3,12 +3,13 @@
 namespace Frozensheep\Synthesize\Tests\Type;
 
 use Frozensheep\Synthesize\Tests\Type\Fixtures\BooleanFixture;
+use PHPUnit\Framework\TestCase;
 
-class BooleanTest extends \PHPUnit_Framework_TestCase {
+class BooleanTest extends TestCase {
 
 	protected $objBoolean;
 
-	protected function setUp(){
+	protected function setUp(): void{
 		$this->objBoolean = new BooleanFixture();
 	}
 
@@ -25,17 +26,17 @@ class BooleanTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testPossitiveInt(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objBoolean->boolean1 = 4;
 	}
 
 	public function testNagativeInt(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objBoolean->boolean1 = -4;
 	}
 
 	public function testZero(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objBoolean->boolean1 = 0;
 	}
 
@@ -45,32 +46,32 @@ class BooleanTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testFloat(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objBoolean->boolean1 = 4.5;
 	}
 
 	public function testNegtiveFloat(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objBoolean->boolean1 = -4.5;
 	}
 
 	public function testString(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objBoolean->boolean1 = 'hello';
 	}
 
 	public function testStringInt(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objBoolean->boolean1 = '4';
 	}
 
 	public function testArray(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objBoolean->boolean1 = array();
 	}
 
 	public function testObject(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objBoolean->boolean1 = new \DateTime();
 	}
 

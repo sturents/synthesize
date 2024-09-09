@@ -3,12 +3,13 @@
 namespace Frozensheep\Synthesize\Tests\Type;
 
 use Frozensheep\Synthesize\Tests\Type\Fixtures\StringFixture;
+use PHPUnit\Framework\TestCase;
 
-class StringTest extends \PHPUnit_Framework_TestCase {
+class StringTest extends TestCase {
 
 	protected $objString;
 
-	protected function setUp(){
+	protected function setUp(): void{
 		$this->objString = new StringFixture();
 	}
 
@@ -17,17 +18,17 @@ class StringTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testPossitiveInt(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objString->string1 = 4;
 	}
 
 	public function testNagativeInt(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objString->string1 = -4;
 	}
 
 	public function testZero(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objString->string1 = 0;
 	}
 
@@ -37,12 +38,12 @@ class StringTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testFloat(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objString->string1 = 4.5;
 	}
 
 	public function testNegtiveFloat(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objString->string1 = -4.5;
 	}
 
@@ -57,12 +58,12 @@ class StringTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testArray(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objString->string1 = array();
 	}
 
 	public function testObject(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objString->string1 = new \DateTime();
 	}
 
@@ -81,7 +82,7 @@ class StringTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testMinBelow(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\LengthException');
+		$this->expectException('Frozensheep\Synthesize\Exception\LengthException');
 		$this->objString->string3 = 'ab';
 	}
 
@@ -91,7 +92,7 @@ class StringTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testMaxAbove(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\LengthException');
+		$this->expectException('Frozensheep\Synthesize\Exception\LengthException');
 		$this->objString->string3 = 'abcdefghijk';
 	}
 

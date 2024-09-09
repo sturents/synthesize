@@ -3,12 +3,13 @@
 namespace Frozensheep\Synthesize\Tests\Type;
 
 use Frozensheep\Synthesize\Tests\Type\Fixtures\NumberFixture;
+use PHPUnit\Framework\TestCase;
 
-class NumberTest extends \PHPUnit_Framework_TestCase {
+class NumberTest extends TestCase {
 
 	protected $objNumber;
 
-	protected function setUp(){
+	protected function setUp(): void{
 		$this->objNumber = new NumberFixture();
 	}
 
@@ -47,7 +48,7 @@ class NumberTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testString(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objNumber->num1 = 'hello';
 	}
 
@@ -57,12 +58,12 @@ class NumberTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testArray(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objNumber->num1 = array();
 	}
 
 	public function testObject(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\TypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\TypeException');
 		$this->objNumber->num1 = new \DateTime();
 	}
 
@@ -81,7 +82,7 @@ class NumberTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testMinBelow(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\RangeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\RangeException');
 		$this->objNumber->num3 = -1;
 	}
 
@@ -91,7 +92,7 @@ class NumberTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testMaxAbove(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\RangeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\RangeException');
 		$this->objNumber->num3 = 11;
 	}
 

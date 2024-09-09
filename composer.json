@@ -21,5 +21,8 @@
 			"Frozensheep\\Synthesize\\": "src",
 			"Frozensheep\\Synthesize\\Tests\\": "tests"
 		}
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^10.5"
 	}
 }

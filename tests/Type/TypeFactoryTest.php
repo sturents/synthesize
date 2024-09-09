@@ -5,10 +5,11 @@ namespace Frozensheep\Synthesize\Tests\Type;
 use Frozensheep\Synthesize\Type\SynthesizeOption;
 use Frozensheep\Synthesize\Type\TypeFactory;
 use Frozensheep\Synthesize\Tests\Type\Fixtures\MonthsFixture;
+use PHPUnit\Framework\TestCase;
 
-class TypeFactoryTest extends \PHPUnit_Framework_TestCase {
+class TypeFactoryTest extends TestCase {
 
-	public function synthesizerOptionProvider(){
+	public static function synthesizerOptionProvider(){
 		return array(
 			"arrayObject" => array(
 				array('type' => 'arrayObject'),
@@ -82,7 +83,7 @@ class TypeFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testCreateFakeType(){
 		$objSynthesizeOptions = new SynthesizeOption(array('type' => 'fake'));
 
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\UnknownTypeException');
+		$this->expectException('Frozensheep\Synthesize\Exception\UnknownTypeException');
 		$objType = TypeFactory::create($objSynthesizeOptions);
 	}
 }

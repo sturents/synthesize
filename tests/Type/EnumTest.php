@@ -5,13 +5,14 @@ namespace Frozensheep\Synthesize\Tests\Type;
 use Frozensheep\Synthesize\Tests\Type\Fixtures\EnumFixture;
 use Frozensheep\Synthesize\Tests\Type\Fixtures\BadEnumFixture;
 use Frozensheep\Synthesize\Tests\Type\Fixtures\MonthsFixture;
+use PHPUnit\Framework\TestCase;
 
-class EnumTest extends \PHPUnit_Framework_TestCase {
+class EnumTest extends TestCase {
 
 	protected $objEnum;
 	protected $objBadEnum;
 
-	protected function setUp(){
+	protected function setUp(): void{
 		$this->objEnum = new EnumFixture();
 		$this->objBadEnum = new BadEnumFixture();
 	}
@@ -31,12 +32,12 @@ class EnumTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testUnknownEnum(){
-		$this->setExpectedException('UnexpectedValueException');
+		$this->expectException('UnexpectedValueException');
 		$this->objEnum->enum = 13;
 	}
 
 	public function testBadValue(){
-		$this->setExpectedException('UnexpectedValueException');
+		$this->expectException('UnexpectedValueException');
 		$this->objEnum->enum = 'hello';
 	}
 
@@ -51,7 +52,7 @@ class EnumTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testMissingClassOption(){
-		$this->setExpectedException('Frozensheep\Synthesize\Exception\MissingOptionException');
+		$this->expectException('Frozensheep\Synthesize\Exception\MissingOptionException');
 		$this->objBadEnum->enum = 1;
 	}
 

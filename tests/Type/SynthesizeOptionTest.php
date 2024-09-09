@@ -3,12 +3,13 @@
 namespace Frozensheep\Synthesize\Tests\Type;
 
 use Frozensheep\Synthesize\Type\SynthesizeOption;
+use PHPUnit\Framework\TestCase;
 
-class SynthesizeOptionTest extends \PHPUnit_Framework_TestCase {
+class SynthesizeOptionTest extends TestCase {
 
 	protected $objSynthesizeOption;
 
-	protected function setUp(){
+	protected function setUp(): void{
 		$this->objSynthesizeOption = new SynthesizeOption();
 	}
 
