@@ -49,7 +49,7 @@ class Type implements TypesInterface, \JsonSerializable {
 	*	@param mixed An optional value to set upon construction.
 	*	@return self
 	*/
-	public function __construct($mixValue = null, SynthesizeOption $objOptions = null){
+	public function __construct($mixValue = null, ?SynthesizeOption $objOptions = null){
 		if($mixValue){
 			$this->setValue($mixValue);
 		}
